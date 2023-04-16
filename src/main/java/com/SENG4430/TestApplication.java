@@ -3,6 +3,7 @@ package com.SENG4430;
 import com.SENG4430.FogIndex.FogIndexList;
 import com.SENG4430.Print.commandLinePrintResults;
 
+import com.SENG4430.WeightedMethods.WeightedMethodsList;
 import org.apache.commons.cli.*;
 import spoon.Launcher;
 import java.util.*;
@@ -72,7 +73,13 @@ public class TestApplication {
                 metricLists.add(mlist);
             }else if (arr[0].equals("halstead_complexity")) {
               //  mlist = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
-            } else {
+            } else if (arr[0].equals("weighted_methods")) {
+                mlist = new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length));
+                metricLists.add(mlist);
+            }else if (arr[0].equals("plaintext_creds")) {
+                //  mlist = new PlaintextCredsList(Arrays.copyOfRange(arr, 1, arr.length));
+                //metricLists.add(mlist);
+            }else {
                 throw new IllegalArgumentException("Invalid " + arr[0] + " metrics argument");
             }
         }
