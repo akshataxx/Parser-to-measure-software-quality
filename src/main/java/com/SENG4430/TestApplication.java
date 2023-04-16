@@ -1,6 +1,7 @@
 package com.SENG4430;
 
 import com.SENG4430.FogIndex.FogIndexList;
+import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
 import com.SENG4430.Print.commandLinePrintResults;
 
 import org.apache.commons.cli.*;
@@ -64,22 +65,21 @@ public class TestApplication {
         metricLists = new LinkedList<>();
         for (String mdefinition : metricDefinitions) {
             String[] arr = mdefinition.split(" ");
-            MetricsList mlist;
+            MetricsList userSelectedMetrics;
             //Metrics list offered by the test application
             if (arr[0].equals("fog_index")) {
-               // FogIndexList mlist;
-                mlist = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
-                metricLists.add(mlist);
+                userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
             }else if (arr[0].equals("halstead_complexity")) {
-              //  mlist = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
+                userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
             } else {
                 throw new IllegalArgumentException("Invalid " + arr[0] + " metrics argument");
             }
+            metricLists.add(userSelectedMetrics);
         }
     }
     private static void executeMetrics(Launcher launcher) {
-        for (MetricsList mlist : metricLists) {
-                mlist.execute(launcher);
+        for (MetricsList userSelectedMetrics : metricLists) {
+            userSelectedMetrics.execute(launcher);
         }
     }
     private static LinkedList<String> getResults() {
@@ -87,8 +87,8 @@ public class TestApplication {
         // sort the metric trackers, this is done so that system testing
         // has same order of the metrics output
         Collections.sort(metricLists, Comparator.comparing(o -> o.getClass().toString()));
-        for (MetricsList mlist : metricLists) {
-            results.add(mlist.toJson());
+        for (MetricsList userSelectedMetrics : metricLists) {
+            results.add(userSelectedMetrics.toJson());
         }
         return results;
     }

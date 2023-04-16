@@ -21,6 +21,11 @@ public class FogIndexList extends MetricsList {
     }
 
    public String toJson() {
-        return fogIndexChk.getFogIndex().toString();
+      // Initialize the JSON string with the FogIndex root object
+       String json = " FogIndex: ";
+       // Add the FogIndex to JSON string
+       json += "\t"+ fogIndexChk.getFogIndex().toString();
+       return json;
+      // return fogIndexChk.getFogIndex().toString();
     }
 }
