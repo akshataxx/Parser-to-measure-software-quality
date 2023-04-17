@@ -4,6 +4,7 @@ import com.SENG4430.FogIndex.FogIndexList;
 import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
 import com.SENG4430.Print.commandLinePrintResults;
 
+import com.SENG4430.WeightedMethods.WeightedMethodsList;
 import org.apache.commons.cli.*;
 import spoon.Launcher;
 import java.util.*;
@@ -70,8 +71,10 @@ public class TestApplication {
             if (arr[0].equals("fog_index")) {
                 userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
             }else if (arr[0].equals("halstead_complexity")) {
+
                 userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
             } else {
+
                 throw new IllegalArgumentException("Invalid " + arr[0] + " metrics argument");
             }
             metricLists.add(userSelectedMetrics);
