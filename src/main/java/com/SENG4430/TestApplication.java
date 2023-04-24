@@ -15,8 +15,9 @@ public class TestApplication {
     private static LinkedList<MetricsList> metricLists; // list of all metrics
     private static  LinkedList<TestResult> testresults; //list all metrics results
 
-    //TO DO: Based on the feedback received enhance the below code to show list of metrics
-    // and accept the metrics choice , also allow user to request multiple metrics at one-go
+    //TO DO: Based on the feedback received enhance the below code to allow multiple metrics to be
+    // provided as input  at one-go and generated output to be printed at one go either via cmd or to be stored
+    //in a file and displayed
     public static void main(String[] args ) {
         if (args.length < 4) {
             System.out.println("Error: Please give correct Arguments");
@@ -85,7 +86,6 @@ public class TestApplication {
             if (arr[0].equals("fog_index")) {
                 userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
             }else if (arr[0].equals("halstead_complexity")) {
-
                 userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
             } else {
                 throw new IllegalArgumentException("Invalid " + arr[0] + " metrics argument");
