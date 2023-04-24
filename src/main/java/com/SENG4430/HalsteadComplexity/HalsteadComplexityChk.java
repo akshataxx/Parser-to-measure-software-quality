@@ -20,7 +20,7 @@ public class HalsteadComplexityChk {
 
     private final Map<String, Integer> halsteadNumbers;
     private final Map<String, String> halsteadAttributes;
-    private final Map<String, CtClass> ctClass;
+    private final Map<String, CtClass> ctClasses;
 
     private final Map<String, Integer> distinctOperators;
     private final Map<String, Integer> distinctOperands;
@@ -40,44 +40,51 @@ public class HalsteadComplexityChk {
 
         halsteadNumbers = new LinkedHashMap<>();
         halsteadAttributes = new LinkedHashMap<>();
-        ctClass = new HashMap<>();
+        ctClasses = new HashMap<>();
         distinctOperators = new HashMap<>();
         distinctOperands = new HashMap<>();
 
         distinctAssgnOperators = new HashMap<>();
         distinctAssgnOperands = new HashMap<>();
+
     }
     // This method performs the Halstead Complexity Checks
     public void check (Launcher launcher) {
         // Get all the classes present in the source code
         List<CtClass<?>> classesInProgram = Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class));
         // For each class, perform the Halstead complexity analysis
-        for (CtClass c : classesInProgram) {
-            ctClass.put(c.getQualifiedName(), c);
-            halsteadComplexityClassComputation(c);
-        }
+        classesInProgram.forEach(this::analyzeClass);
 
         // Calculate the values of n1, n2, N1, and N2 by adding values from the data structures
-        n1 += distinctOperators.size();
-        n1 += distinctAssgnOperators.size();
-        n2 += distinctOperands.size();
-        n2 += distinctAssgnOperands.size();
+        n1 += getTotalCountOfDistinctOperators();
+        n1 += getTotalCountOfDistinctAssignmentOperators();
+        n2 += getTotalCountOfDistinctOperands();
+        n2 += getTotalCountOfDistinctAssignmentOperands();
 
-        for (Map.Entry<String, Integer> dOperator : distinctOperators.entrySet()) {
-            N1 += dOperator.getValue();
-        }
+        N1 += sumValues(distinctOperators);
+        N1 += sumValues(distinctAssgnOperators);
+        N2 += sumValues(distinctOperands);
+        N2 += sumValues(distinctAssgnOperands);
 
-        for (Map.Entry<String, Integer> dAssgnOperator : distinctAssgnOperators.entrySet()) {
-            N1 += dAssgnOperator.getValue();
-        }
-
-        for (Map.Entry<String, Integer> dOperand : distinctOperands.entrySet()) {
-            N2 += dOperand.getValue();
-        }
-
-        for (Map.Entry<String, Integer> dAssgnOperand : distinctAssgnOperands.entrySet()) {
-            N2 += dAssgnOperand.getValue();
-        }
+    }
+    private void analyzeClass(CtClass<?> ctClass) {
+        ctClasses.put(ctClass.getQualifiedName(), ctClass);
+        halsteadComplexityClassComputation(ctClass);
+    }
+    private int sumValues(Map<String, Integer> map) {
+        return map.values().stream().mapToInt(Integer::intValue).sum();
+    }
+    private int getTotalCountOfDistinctOperators() {
+        return sumValues(distinctOperators);
+    }
+    private int getTotalCountOfDistinctAssignmentOperators() {
+        return sumValues(distinctAssgnOperators);
+    }
+    private int getTotalCountOfDistinctOperands() {
+        return sumValues(distinctOperands);
+    }
+    private int getTotalCountOfDistinctAssignmentOperands() {
+        return sumValues(distinctAssgnOperands);
     }
 
     private void halsteadComplexityClassComputation (CtClass<?> c) {
@@ -272,29 +279,25 @@ public class HalsteadComplexityChk {
         double timeRequiredtoProgram;
         double deliveredBugs;
 
-        try {
-            programVocabulary = n1 + n2;                        // Compute program vocabulary size
-            programLength = N1 + N2;                            // Compute program length
-            estimatedProgramLength  = n1 * (Math.log(n1) / Math.log(2)) + n2 * (Math.log(n2) / Math.log(2.0));// Compute estimated program length
-            volume = programLength * (Math.log(n1) / Math.log(2) + Math.log(n2) / Math.log(2));     // Compute volume
-            difficulty = (n1 / 2.0) * (N2 / (double) n2);                // Compute difficulty
-            effort = volume * difficulty;                       // Compute effort
-            timeRequiredtoProgram = effort  / 18.0;             // Compute time required to program
-            deliveredBugs = volume / 3000.0;                    // Compute delivered bugs
+        programVocabulary = n1 + n2;                        // Compute program vocabulary size
+        programLength = N1 + N2;                            // Compute program length
+        estimatedProgramLength  = n1 * (Math.log(n1) / Math.log(2)) + n2 * (Math.log(n2) / Math.log(2.0));// Compute estimated program length
+        volume = programLength * (Math.log(n1) / Math.log(2) + Math.log(n2) / Math.log(2));     // Compute volume
+        difficulty = (n1 / 2.0) * (N2 / (double) n2);                // Compute difficulty
+        effort = volume * difficulty;                       // Compute effort
+        timeRequiredtoProgram = effort  / 18.0;             // Compute time required to program
+        deliveredBugs = volume / 3000.0;                    // Compute delivered bugs
 
-            // Store results in a map
-            halsteadAttributes.put("Program vocabulary n        ", Integer.toString(programVocabulary));
-            halsteadAttributes.put("Program length N            ", Integer.toString(programLength));
-            halsteadAttributes.put("Estimated program length N^ ", Double.toString(estimatedProgramLength));
-            halsteadAttributes.put("Volume V                    ", Double.toString(volume));
-            halsteadAttributes.put("Difficulty D                ", Double.toString(difficulty));
-            halsteadAttributes.put("Effort E                    ", Double.toString(effort));
-            halsteadAttributes.put("Time required to program T  ", Double.toString(timeRequiredtoProgram));
-            halsteadAttributes.put("Delivered bugs B            ", Double.toString(deliveredBugs));
+        // Store results in a map
+        halsteadAttributes.put("Program vocabulary n        ", Integer.toString(programVocabulary));
+        halsteadAttributes.put("Program length N            ", Integer.toString(programLength));
+        halsteadAttributes.put("Estimated program length N^ ", Double.toString(estimatedProgramLength));
+        halsteadAttributes.put("Volume V                    ", Double.toString(volume));
+        halsteadAttributes.put("Difficulty D                ", Double.toString(difficulty));
+        halsteadAttributes.put("Effort E                    ", Double.toString(effort));
+        halsteadAttributes.put("Time required to program T  ", Double.toString(timeRequiredtoProgram));
+        halsteadAttributes.put("Delivered bugs B            ", Double.toString(deliveredBugs));
 
-        }catch(Exception e){
-            System.err.println("Error in computation: " + e.getMessage());
-        }
         return halsteadAttributes;
     }
 }

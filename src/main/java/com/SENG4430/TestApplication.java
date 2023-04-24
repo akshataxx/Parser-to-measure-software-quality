@@ -7,25 +7,29 @@ import com.SENG4430.Print.commandLinePrintResults;
 import com.SENG4430.WeightedMethods.WeightedMethodsList;
 import org.apache.commons.cli.*;
 import spoon.Launcher;
+import spoon.reflect.CtModel;
+import spoon.reflect.declaration.CtElement;
 import java.util.*;
 public class TestApplication {
     private static Launcher launcher;   // launchers used by metrics
     private static LinkedList<MetricsList> metricLists; // list of all metrics
     private static  LinkedList<TestResult> testresults; //list all metrics results
 
+    //TO DO: Based on the feedback received enhance the below code to show list of metrics
+    // and accept the metrics choice , also allow user to request multiple metrics at one-go
     public static void main(String[] args ) {
         if (args.length < 4) {
             System.out.println("Error: Please give correct Arguments");
             System.out.println("Correct Arguments should be: SourceFileOrDirectory -m metric-flag -r result-flag");
             System.exit(1);
         }
-        processArgs(args); // process arguments to read arguments, create launcher, create metrics and outputs
+        launcher= processArgs(args); // process arguments to read arguments, create launcher, create metrics and outputs
         executeMetrics(launcher);                        // execute each metrics measurement
         LinkedList<String> metricResults = getResults(); // get results from metrics
         create(metricResults);                          // pass metric results for printing it
     }
 
-    private static void processArgs(String[] args) {
+    private static Launcher processArgs(String[] args) {
         // Add command line options
         Options opt = new Options();
         Option metricOption = new Option("m", true, "metrics name");
@@ -51,9 +55,19 @@ public class TestApplication {
         if (resultOptions == null) resultOptions = new String[] {"cmd"};
         testResults(resultOptions);
 
-        launcher = new Launcher();
-        launcher.addInputResource(args[0]);
-        launcher.buildModel();
+        launcher = new Launcher();             // create a Spoon Launcher
+        launcher.addInputResource(args[0]);    // set the input file
+        CtModel model = launcher.buildModel(); // build the Spoon model
+        boolean hasComments = false;
+        for (CtElement element : model.getElements(e -> true)) {
+            if (element.getComments() != null) {
+                hasComments = true;
+                break;
+            }
+        }
+        System.out.println( "code has comments ? " + hasComments);
+        launcher.getEnvironment().setCommentEnabled(hasComments);
+        return launcher;
     }
     //helper method for the catch block, it runs only if parse exception is encountered
     private static void printHelp(Options options) {
@@ -74,7 +88,6 @@ public class TestApplication {
 
                 userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
             } else {
-
                 throw new IllegalArgumentException("Invalid " + arr[0] + " metrics argument");
             }
             metricLists.add(userSelectedMetrics);
@@ -110,11 +123,12 @@ public class TestApplication {
             else {
                 throw new IllegalArgumentException("Invalid " + arr[0] + " Result");
             }
-
             testresults.add(testresult);
             i++;
         }
     }
+    //TO DO: Enhance the program to take input as multiple metrics
+    //for this print program is already enhanced to have linkedlist
     private static void create(LinkedList<String> resultlist) {
         Iterator<TestResult> iterator = testresults.iterator();
         while (iterator.hasNext()) {
