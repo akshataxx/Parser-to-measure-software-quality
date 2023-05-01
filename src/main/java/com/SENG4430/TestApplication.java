@@ -2,6 +2,7 @@ package com.SENG4430;
 
 import com.SENG4430.FogIndex.FogIndexList;
 import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
+import com.SENG4430.PlainTextCredentials.PlainTextCredentialsList;
 import com.SENG4430.Print.commandLinePrintResults;
 
 import com.SENG4430.WeightedMethods.WeightedMethodsList;
@@ -87,6 +88,10 @@ public class TestApplication {
                     userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else if (arr[i].equals("halstead_complexity")) {
                     userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
+                }else if (arr[i].equals("weighted_methods")) {
+                    userSelectedMetrics = new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length));
+                }else if (arr[i].equals("plaintext_credentials")) {
+                    userSelectedMetrics = new PlainTextCredentialsList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else {
                     throw new IllegalArgumentException("Invalid " + arr[i] + " metrics argument");
                 }
