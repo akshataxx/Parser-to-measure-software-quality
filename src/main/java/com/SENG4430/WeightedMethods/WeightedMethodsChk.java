@@ -13,11 +13,16 @@ import java.util.*;
 public class WeightedMethodsChk {
 
     private final LinkedList<Map.Entry<String, Double>> classWeightedMethodsChk;
+    private final Map<String, Double> wmAttributes;
     public WeightedMethodsChk() {      //Constructor
         classWeightedMethodsChk = new LinkedList<>();
+        wmAttributes = new LinkedHashMap<>();
+        //String password = "test2";
+
     }
+
+
     public void WeightedMethodsChk(Launcher launcher) {
-        //classWeightedMethodsChk = new ArrayList<>();
         for (CtClass<?> classObject : Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class))) {
             calculateWeightedMethodsChk(classObject);
         }
@@ -34,13 +39,10 @@ public class WeightedMethodsChk {
             double methodWeight = calculateWeightedMethodCount(ctMethod);
             methodsChkMap.put(ctMethod.getSimpleName(), methodWeight);
             totalWeightedMethods += methodWeight;
+            //String password = "test3";
+            //String password = "test4";
         }
-        // System.out.println("Class name: " + classObject.getSimpleName());
-        // System.out.println("Total weighted method count: " + totalWeightedMethods);
-        // System.out.println("------------------------------");
         classWeightedMethodsChk.add(new AbstractMap.SimpleEntry<>(classObject.getSimpleName(), totalWeightedMethods));
-        // System.out.println(classWeightedMethodsChk);
-
     }
 
 
