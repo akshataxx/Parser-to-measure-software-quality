@@ -15,9 +15,8 @@ public class TestApplication {
     private static LinkedList<MetricsList> metricLists; // list of all metrics
     private static  LinkedList<TestResult> testresults; //list all metrics results
 
-    //TO DO: Based on the feedback received enhance the below code to allow multiple metrics to be
-    // provided as input  at one-go and generated output to be printed at one go either via cmd or to be stored
-    //in a file and displayed
+    //TO DO: Based on the feedback received enhance the below code to allow metrics to be
+    // to be routed to an output file and output file to be displayed
     public static void main(String[] args ) {
         if (args.length < 4) {
             System.out.println("Error: Please give correct Arguments");
@@ -66,7 +65,7 @@ public class TestApplication {
                 break;
             }
         }
-        System.out.println( "code has comments ? " + hasComments);
+       // System.out.println( "code has comments ? " + hasComments); //Debug Statement
         launcher.getEnvironment().setCommentEnabled(hasComments);
         return launcher;
     }
@@ -81,16 +80,18 @@ public class TestApplication {
         metricLists = new LinkedList<>();
         for (String mdefinition : metricDefinitions) {
             String[] arr = mdefinition.split(" ");
-            MetricsList userSelectedMetrics;
-            //Metrics list offered by the test application
-            if (arr[0].equals("fog_index")) {
-                userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
-            }else if (arr[0].equals("halstead_complexity")) {
-                userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
-            } else {
-                throw new IllegalArgumentException("Invalid " + arr[0] + " metrics argument");
+            for (int i=0; i< arr.length; i++) {
+                MetricsList userSelectedMetrics;
+                //Metrics list offered by the test application
+                if (arr[i].equals("fog_index")) {
+                    userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
+                } else if (arr[i].equals("halstead_complexity")) {
+                    userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
+                } else {
+                    throw new IllegalArgumentException("Invalid " + arr[i] + " metrics argument");
+                }
+                metricLists.add(userSelectedMetrics);
             }
-            metricLists.add(userSelectedMetrics);
         }
     }
     private static void executeMetrics(Launcher launcher) {

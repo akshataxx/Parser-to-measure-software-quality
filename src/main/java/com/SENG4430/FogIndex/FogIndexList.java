@@ -33,12 +33,14 @@ public class FogIndexList extends MetricsList {
      * Converts the FogIndex to JSON format for reporting purposes.
      *  @return a JSON-formatted string representation of the Fog Index.
      */
+    @Override
     public String toJson() {
         // Extract the Fog Index value from the FogIndexChk object and format it
         String fogIndex = fogIndexChk.getFogIndex().toString();
         String[] fogIndexParts = fogIndex.split("testResults=");
         String formattedFogIndex = fogIndexParts[1].replaceAll("[\\[\\],{}]", "").trim();
+        formattedFogIndex +=  "\n";
         // Create a JSON-formatted string with a root object that has a FogIndex property and the formatted Fog Index value
-        return String.format(" FogIndex: %s ", formattedFogIndex);
+        return String.format("FogIndex: %s ", formattedFogIndex);
     }
 }

@@ -6,20 +6,14 @@ import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 import java.util.*;
-import spoon.reflect.declaration.*;
-import spoon.reflect.reference.*;
 import spoon.reflect.code.*;
-import spoon.reflect.visitor.*;
-import spoon.support.reflect.code.*;
-
-
 
 public class HalsteadComplexityChk {
     private int n1, n2; //number of distinct operators and operands
     private int N1, N2; //Total number of occurrences of operators and operands
 
     private final Map<String, Integer> halsteadNumbers;
-    private final Map<String, String> halsteadAttributes;
+    private final Map<String, Double> halsteadAttributes;
     private final Map<String, CtClass> ctClasses;
 
     private final Map<String, Integer> distinctOperators;
@@ -269,34 +263,25 @@ public class HalsteadComplexityChk {
 
         return halsteadNumbers;
     }
-    public Map<String, String> getHalsteadAttributes(){
-        int programVocabulary;
-        int programLength;
-        double estimatedProgramLength ;
-        double volume;
-        double difficulty;
-        double effort;
-        double timeRequiredtoProgram;
-        double deliveredBugs;
-
-        programVocabulary = n1 + n2;                        // Compute program vocabulary size
-        programLength = N1 + N2;                            // Compute program length
-        estimatedProgramLength  = n1 * (Math.log(n1) / Math.log(2)) + n2 * (Math.log(n2) / Math.log(2.0));// Compute estimated program length
-        volume = programLength * (Math.log(n1) / Math.log(2) + Math.log(n2) / Math.log(2));     // Compute volume
-        difficulty = (n1 / 2.0) * (N2 / (double) n2);                // Compute difficulty
-        effort = volume * difficulty;                       // Compute effort
-        timeRequiredtoProgram = effort  / 18.0;             // Compute time required to program
-        deliveredBugs = volume / 3000.0;                    // Compute delivered bugs
+    public Map<String, Double> getHalsteadAttributes(){
+        double programVocabulary = n1 + n2;                        // Compute program vocabulary size
+        double programLength = N1 + N2;                            // Compute program length
+        double estimatedProgramLength  = n1 * (Math.log(n1) / Math.log(2)) + n2 * (Math.log(n2) / Math.log(2.0));// Compute estimated program length
+        double volume = programLength * (Math.log(n1) / Math.log(2) + Math.log(n2) / Math.log(2));     // Compute volume
+        double difficulty = (n1 / 2.0) * (N2 / (double) n2);        // Compute difficulty
+        double effort = volume * difficulty;                       // Compute effort
+        double timeRequiredToProgram = effort  / 18.0;             // Compute time required to program
+        double deliveredBugs = volume / 3000.0;                    // Compute delivered bugs
 
         // Store results in a map
-        halsteadAttributes.put("Program vocabulary n        ", Integer.toString(programVocabulary));
-        halsteadAttributes.put("Program length N            ", Integer.toString(programLength));
-        halsteadAttributes.put("Estimated program length N^ ", Double.toString(estimatedProgramLength));
-        halsteadAttributes.put("Volume V                    ", Double.toString(volume));
-        halsteadAttributes.put("Difficulty D                ", Double.toString(difficulty));
-        halsteadAttributes.put("Effort E                    ", Double.toString(effort));
-        halsteadAttributes.put("Time required to program T  ", Double.toString(timeRequiredtoProgram));
-        halsteadAttributes.put("Delivered bugs B            ", Double.toString(deliveredBugs));
+        halsteadAttributes.put("Program vocabulary n        ", programVocabulary);
+        halsteadAttributes.put("Program length N            ", programLength);
+        halsteadAttributes.put("Estimated program length N^ ", estimatedProgramLength);
+        halsteadAttributes.put("Volume V                    ", volume);
+        halsteadAttributes.put("Difficulty D                ", difficulty);
+        halsteadAttributes.put("Effort E                    ", effort);
+        halsteadAttributes.put("Time required to program T  ", timeRequiredToProgram);
+        halsteadAttributes.put("Delivered bugs B            ", deliveredBugs);
 
         return halsteadAttributes;
     }

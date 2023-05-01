@@ -33,39 +33,39 @@ public class FogIndexChk {
         // Loop through all the classes in the code using Spoon framework
         for (CtClass<?> classObject : Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class))) {
             // Calculate the Fog Index for each method in the class and add the result to classFogChk LinkedList
-            classFogChk.addLast(new AbstractMap.SimpleEntry<>(classObject.getSimpleName(), calculateMethodFogIndex(classObject)));
+            classFogChk.addLast(new AbstractMap.SimpleEntry<>(classObject.getSimpleName(), computeFogIndex(classObject)));
 
         }
     }
 
     /**
-     * Reads class object and gets all its functions along with comments for each function
+     * Reads class object and gets all its functions and comments for each function
      * @param classObject
      * @return function name and its fog index number
      */
-    private TreeMap<String, Double> calculateMethodFogIndex(CtClass<?> classObject) {
+    private TreeMap<String, Double> computeFogIndex(CtClass<?> classObject) {
         // Calculate the Fog Index for each method in the class and add the result to classFogChk LinkedList
         TreeMap<String, Double> methodComments = new TreeMap<>();
         for(CtMethod<?> methodObject : classObject.getMethods()){
-            List<CtComment> comments = methodObject.getElements(new TypeFilter<>(CtComment.class));
+            List<CtComment> functionComments = methodObject.getElements(new TypeFilter<>(CtComment.class));
             //Calculate the Fog Index for each comment and add the result to methodComments TreeMap
-            methodComments.put(methodObject.getSimpleName(), calculateFogIndex(comments));
+            methodComments.put(methodObject.getSimpleName(), calculateFogIndex(functionComments));
         }
         return methodComments;
     }
     /**
      * Reads comments of a function and calculates its fog index
-     * @param methodComments
+     * @param functionComments
      * @return fog index number for that function
      */
-    private Double calculateFogIndex(List<CtComment> methodComments){
+    private Double calculateFogIndex(List<CtComment> functionComments){
         // Initialize variables to store the number of words, sentences, and complex words in the comments
         int numWords = 0;
         int numSentences = 0;
         int numComplexWords = 0;
         // If there are comments for the method, loop through all the comments
-        if(!methodComments.isEmpty()) {
-            for (CtComment comment : methodComments) {
+        if(!functionComments.isEmpty()) {
+            for (CtComment comment : functionComments) {
                 // Get the content of the comment and count the number of words and sentences
                 String commentContent = comment.getContent();
                 numWords += commentContent.split("\\s+").length;
@@ -81,7 +81,7 @@ public class FogIndexChk {
 
     /**
      * This method computes the complex words
-     * @param  string comments
+     * @param  string text
      * @return count of complex words
      */
     private static int countComplexWords(String text) {
@@ -98,7 +98,7 @@ public class FogIndexChk {
 
     /**
      * This method computes the Syllables
-     * @param  string words
+     * @param  string word
      * @return number of Syllables
      */
     private static int countSyllables(String word) {

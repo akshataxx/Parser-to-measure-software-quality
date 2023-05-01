@@ -29,7 +29,7 @@ public class HalsteadComplexityList extends MetricsList  {
 
         // Add the Halstead Complexity Measures object to the JSON string
         json += "\n\t Halstead Complexity Measures: ";
-        for (Map.Entry<String, String> entry : halsteadComplexityChk.getHalsteadAttributes().entrySet()) {
+        for (Map.Entry<String, Double> entry : halsteadComplexityChk.getHalsteadAttributes().entrySet()) {
             // Special formatting for the 'Time required to program' measure
             if(entry.getKey().equals("Time required to program T  ")){
                 json += "\n\t\t"+entry.getKey()+": "+entry.getValue()+" seconds,";
@@ -41,6 +41,7 @@ public class HalsteadComplexityList extends MetricsList  {
                 json += "\n\t\t" + entry.getKey() + ": " + entry.getValue() + ",";
             }
         }
+        json += "\n";
         // Return the complete JSON string
         return json;
     }
