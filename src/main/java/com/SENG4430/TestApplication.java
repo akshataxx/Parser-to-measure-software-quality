@@ -1,5 +1,6 @@
 package com.SENG4430;
 
+import com.SENG4430.ClassCoupling.ClassCouplingList;
 import com.SENG4430.FogIndex.FogIndexList;
 import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
 import com.SENG4430.PlainTextCredentials.PlainTextCredentialsList;
@@ -92,7 +93,11 @@ public class TestApplication {
                     userSelectedMetrics = new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length));
                 }else if (arr[i].equals("plaintext_credentials")) {
                     userSelectedMetrics = new PlainTextCredentialsList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else {
+                }
+                else if (arr[i].equals("class_coupling")) {
+                    userSelectedMetrics = new ClassCouplingList(Arrays.copyOfRange(arr, 1, arr.length));
+                }
+                else {
                     throw new IllegalArgumentException("Invalid " + arr[i] + " metrics argument");
                 }
                 metricLists.add(userSelectedMetrics);
