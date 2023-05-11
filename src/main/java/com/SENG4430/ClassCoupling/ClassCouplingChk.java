@@ -43,6 +43,8 @@ public class ClassCouplingChk
 
         CtClass<?> ctClass = couplingClass.getCtClass();
 
+        //System.out.println("-----------------------\n Class: " + ctClass.getSimpleName());
+
         // Initialize the class coupling metric to zero
         int classCoupling = 0;
 
@@ -66,9 +68,27 @@ public class ClassCouplingChk
         recordedClasses.put("void", 0);
         recordedClasses.put("java.lang.Object", 0);
 
+        //for each invocation in the class
+        for (CtInvocation methodInvocation : ctClass.getElements(new TypeFilter<>(CtInvocation.class)))
+        {
+            //System.out.println("invoc: " + methodInvocation.toString() + " " + methodInvocation.getTarget());
+
+            if(methodInvocation.getTarget() != null)
+            {
+                if(!recordedClasses.containsKey(methodInvocation.getTarget().toString()))
+                {
+                    //System.out.println("\n Adding: " + methodInvocation.getTarget());
+                    classCoupling++;
+                    recordedClasses.put(methodInvocation.getTarget().toString(), 0);
+                }
+            }
+        }
+
         //for each typed element in the class
         for (CtTypedElement typedElement : ctClass.getElements(new TypeFilter<>(CtTypedElement.class)))
         {
+            //System.out.println("element: " + typedElement.toString() + " " + typedElement.getType().toString());
+
             String typedElementStr = typedElement.getType().toString();
 
             //if array, trim array ending off to get base obj string

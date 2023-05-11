@@ -1,4 +1,4 @@
-package com.SENG4430.ClassCoupling;
+package com.SENG4430.ClassCoupling.TestFiles;
 
 public class Test
 {
@@ -14,6 +14,9 @@ public class Test
 
         for (boolean i = true; i == true; i = !i)
         {
+            //System.out will count as 2 class dependencies
+            //the standard syntax just abstracts this
+            //java.lang.System.out and java.io.PrintStream
             System.out.println(i);
         }
 

@@ -1,4 +1,4 @@
-package com.SENG4430.ClassCoupling;
+package com.SENG4430.ClassCoupling.TestFiles;
 
 public class BaddestCode {
     public BaddestCode()
