@@ -2,16 +2,12 @@ package com.SENG4430.ClassCoupling;
 
 import spoon.Launcher;
 import spoon.reflect.declaration.*;
-import spoon.reflect.reference.*;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.reflect.visitor.CtVisitor;
 
 import spoon.reflect.code.*;
 
-import java.lang.annotation.Annotation;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ClassCouplingChk
 {

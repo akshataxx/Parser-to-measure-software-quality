@@ -6,6 +6,7 @@ import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
 import com.SENG4430.PlainTextCredentials.PlainTextCredentialsList;
 import com.SENG4430.Print.commandLinePrintResults;
 
+import com.SENG4430.ResponseForClass.ResponseForClassList;
 import com.SENG4430.WeightedMethods.WeightedMethodsList;
 import org.apache.commons.cli.*;
 import spoon.Launcher;
@@ -96,6 +97,9 @@ public class TestApplication {
                 }
                 else if (arr[i].equals("class_coupling")) {
                     userSelectedMetrics = new ClassCouplingList(Arrays.copyOfRange(arr, 1, arr.length));
+                }
+                else if (arr[i].equals("rfc")) {
+                    userSelectedMetrics = new ResponseForClassList(Arrays.copyOfRange(arr, 1, arr.length));
                 }
                 else {
                     throw new IllegalArgumentException("Invalid " + arr[i] + " metrics argument");

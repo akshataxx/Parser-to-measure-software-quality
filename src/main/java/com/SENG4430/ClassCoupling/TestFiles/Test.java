@@ -6,7 +6,7 @@ public class Test
     {
         bruh();
 
-        int a = BadCode.getTwo(BadCode.getOne()) + 2;
+        int a = BadCode.getTwo(BadCode.getOne(), 1) + 2;
 
         BadCode b = new BadCode();
 

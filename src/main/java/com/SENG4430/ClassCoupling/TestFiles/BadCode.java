@@ -11,7 +11,7 @@ public class BadCode {
         return 1;
     }
 
-    public static int getTwo(int a)
+    public static int getTwo(int a, int c)
     {
         return 2;
     }
