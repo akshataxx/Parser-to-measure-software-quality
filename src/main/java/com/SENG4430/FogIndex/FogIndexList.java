@@ -1,3 +1,9 @@
+/*
+ * Developer: Akshata Dhuraji
+ * Program Name: FogIndexList
+ * Description: This program creates an instance of FogIndexChk to compute the FogIndex metrics of given file
+ *  passed as input by TestApplication and returns the FogIndex values in a printable format
+ */
 package com.SENG4430.FogIndex;
 
 import com.SENG4430.MetricsList;
@@ -14,7 +20,7 @@ public class FogIndexList extends MetricsList {
 
     /**
      * Constructor that initializes the FogIndexChk object.
-     * @param args arguments passed to the constructor.
+     * @param args arguments passed to the constructor
      */
     public FogIndexList(String[] args) {
         fogIndexChk = new FogIndexChk();

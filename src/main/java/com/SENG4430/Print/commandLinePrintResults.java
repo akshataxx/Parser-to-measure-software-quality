@@ -1,3 +1,9 @@
+/*
+ * Developer: Akshata Dhuraji
+ * Program Name: commandLinePrintResults
+ * Description: This program prints the results of various complexity metrics on command line
+ * i.e. also the default print option
+ */
 package com.SENG4430.Print;
 
 import com.SENG4430.TestResult;

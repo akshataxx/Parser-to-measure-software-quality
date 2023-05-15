@@ -1,3 +1,9 @@
+/*
+ * Developer: Akshata Dhuraji
+ * Program Name: HalsteadComplexityChk
+ * Description: This program computes Halstead complexity of given file passed as input by TestApplication
+ *  and returns the Halstead complexity values to HalsteadComplexityList
+ */
 package com.SENG4430.HalsteadComplexity;
 
 import spoon.Launcher;
@@ -61,23 +67,32 @@ public class HalsteadComplexityChk {
         N2 += sumValues(distinctAssgnOperands);
 
     }
-    private void analyzeClass(CtClass<?> ctClass) {
+    public int getN1(){ return n1;}
+
+    public int getN2(){return n2;}
+
+    public Map<String, Integer> getDistinctOperators() {return distinctOperators;}
+
+    public Map<String, Integer> getDistinctOperands() {return distinctOperands;}
+
+
+    public void analyzeClass(CtClass<?> ctClass) {
         ctClasses.put(ctClass.getQualifiedName(), ctClass);
         halsteadComplexityClassComputation(ctClass);
     }
-    private int sumValues(Map<String, Integer> map) {
+    public int sumValues(Map<String, Integer> map) {
         return map.values().stream().mapToInt(Integer::intValue).sum();
     }
-    private int getTotalCountOfDistinctOperators() {
+    public int getTotalCountOfDistinctOperators() {
         return sumValues(distinctOperators);
     }
-    private int getTotalCountOfDistinctAssignmentOperators() {
+    public int getTotalCountOfDistinctAssignmentOperators() {
         return sumValues(distinctAssgnOperators);
     }
-    private int getTotalCountOfDistinctOperands() {
+    public int getTotalCountOfDistinctOperands() {
         return sumValues(distinctOperands);
     }
-    private int getTotalCountOfDistinctAssignmentOperands() {
+    public int getTotalCountOfDistinctAssignmentOperands() {
         return sumValues(distinctAssgnOperands);
     }
 

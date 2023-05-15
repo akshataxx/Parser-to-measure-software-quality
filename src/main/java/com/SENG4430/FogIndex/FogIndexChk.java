@@ -1,3 +1,9 @@
+/*
+ * Developer: Akshata Dhuraji
+ * Program Name: FogIndexChk
+ * Description: This program computes FogIndex of given file passed as input by TestApplication
+ *  and returns the FogIndexChk values to FogIndexList
+ */
 package com.SENG4430.FogIndex;
 
 import spoon.Launcher;
@@ -43,7 +49,7 @@ public class FogIndexChk {
      * @param classObject
      * @return function name and its fog index number
      */
-    private TreeMap<String, Double> computeFogIndex(CtClass<?> classObject) {
+    public TreeMap<String, Double> computeFogIndex(CtClass<?> classObject) {
         // Calculate the Fog Index for each method in the class and add the result to classFogChk LinkedList
         TreeMap<String, Double> methodComments = new TreeMap<>();
         for(CtMethod<?> methodObject : classObject.getMethods()){
@@ -58,7 +64,7 @@ public class FogIndexChk {
      * @param functionComments
      * @return fog index number for that function
      */
-    private Double calculateFogIndex(List<CtComment> functionComments){
+    public Double calculateFogIndex(List<CtComment> functionComments){
         // Initialize variables to store the number of words, sentences, and complex words in the comments
         int numWords = 0;
         int numSentences = 0;
@@ -70,6 +76,11 @@ public class FogIndexChk {
                 String commentContent = comment.getContent();
                 numWords += commentContent.split("\\s+").length;
                 numSentences += commentContent.split("[.!?]+").length;
+                //Debug code begins
+                System.out.println("Comment: " + commentContent);
+                System.out.println("Num words: " + numWords);
+                System.out.println("Num sentences: " + numSentences);
+                //Debug code ends
                 // Count the number of complex words in the comment
                 numComplexWords += countComplexWords(commentContent);
             }
@@ -84,7 +95,7 @@ public class FogIndexChk {
      * @param  string text
      * @return count of complex words
      */
-    private static int countComplexWords(String text) {
+    public static int countComplexWords(String text) {
         int numComplexWords = 0;
         String[] words = text.split("\\s+");
         for (String word : words) {
@@ -101,7 +112,7 @@ public class FogIndexChk {
      * @param  string word
      * @return number of Syllables
      */
-    private static int countSyllables(String word) {
+    public static int countSyllables(String word) {
         word = word.toLowerCase();
         int numSyllables = 0;
         boolean prevVowel = false;
@@ -126,7 +137,7 @@ public class FogIndexChk {
      * @param  char
      * @return true or false
      */
-    private static boolean isVowel(char c) {
+    public static boolean isVowel(char c) {
         return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
     }
 }

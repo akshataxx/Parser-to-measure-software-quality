@@ -1,3 +1,9 @@
+/*
+ * Developer: Akshata Dhuraji
+ * Program Name: TestResult
+ * Description: TestResult class , Abstract class implemented in Print package
+ * This class provides a structure for printing results
+ */
 package com.SENG4430;
 import java.util.*;
 /*
