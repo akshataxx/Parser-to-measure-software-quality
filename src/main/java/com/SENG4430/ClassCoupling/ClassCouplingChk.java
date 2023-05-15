@@ -9,16 +9,23 @@ import spoon.reflect.code.*;
 
 import java.util.*;
 
+//This class calculates the Class Coupling values for a set of given classes
+//Authored by: Ewart Stone c3350508
+//Modified: 10/5/2023
+
 public class ClassCouplingChk
 {
+    //public methods
+
+    //constructor
     public ClassCouplingChk()
     {
         //init class vars
         ctClass = new HashMap<>();
-
-
     }
 
+    //preconditions: launcher is setup for a specific java file or folder
+    //postconditions: calculates the class coupling for all java classes in the launcher input
     public void check(Launcher launcher)
     {
         List<CtClass<?>> classInput = Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class));
@@ -34,9 +41,11 @@ public class ClassCouplingChk
         }
     }
 
+    //preconditions: a CtClass has been contained and passed in a couplingClass
+    //postconditions: calculates and stores the class coupling of the class in the couplingClass input
     public void classCouplingComputation(ClassCoupling couplingClass)
     {
-
+        //get CtClass
         CtClass<?> ctClass = couplingClass.getCtClass();
 
         //System.out.println("-----------------------\n Class: " + ctClass.getSimpleName());
@@ -49,7 +58,7 @@ public class ClassCouplingChk
         //add base class to the hashmap so it is not counted
         recordedClasses.put(ctClass.getQualifiedName(), 0);
 
-        //insert primitive types into recorded so they are not counted types
+        //insert primitive types and keywords into recorded so they are not counted types
         recordedClasses.put("int", 0);
         recordedClasses.put("boolean", 0);
         recordedClasses.put("byte", 0);
@@ -62,6 +71,8 @@ public class ClassCouplingChk
         //add object base class of all java objects to the list so it is not counted
         //record void as a null type keyword to be not included
         recordedClasses.put("void", 0);
+
+        //record Object as an exception to the count as all java files have an object due to the class inheritance of all classes in java
         recordedClasses.put("java.lang.Object", 0);
 
         //for each invocation in the class
@@ -69,6 +80,8 @@ public class ClassCouplingChk
         {
             //System.out.println("invoc: " + methodInvocation.toString() + " " + methodInvocation.getTarget());
 
+            //if method invocation's class is not recorded
+                //record class and increment class coupling
             if(methodInvocation.getTarget() != null)
             {
                 if(!recordedClasses.containsKey(methodInvocation.getTarget().toString()))
@@ -98,6 +111,8 @@ public class ClassCouplingChk
                 }
             }
 
+            //if element is an object and is not recorded
+                //record class and increment class coupling
             if(!recordedClasses.containsKey(typedElementStr))
             {
                 //System.out.println("\n Adding: " + typedElementStr);
@@ -106,9 +121,12 @@ public class ClassCouplingChk
             }
         }
 
+        //set coupling and store
         couplingClass.setCoupling(classCoupling);
     }
 
+    //precondition: check has been run with a valid input
+    //postcondition: outputs a Map<String, Integer> of all classes and their couplings
     public Map<String, Integer> getClassCouplings()
     {
         Map<String, Integer> out = new HashMap<>();
@@ -121,5 +139,6 @@ public class ClassCouplingChk
         return out;
     }
 
+    //private vars
     private HashMap<String, ClassCoupling> ctClass;
 }

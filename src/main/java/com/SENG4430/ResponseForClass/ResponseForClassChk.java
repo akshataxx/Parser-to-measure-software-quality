@@ -1,6 +1,5 @@
 package com.SENG4430.ResponseForClass;
 
-import com.SENG4430.ClassCoupling.ClassCoupling;
 import spoon.Launcher;
 import spoon.reflect.code.CtConstructorCall;
 import spoon.reflect.code.CtInvocation;
@@ -12,23 +11,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//This class calculates the Response For Class values for a set of given classes
+//That is the amount of unique methods callable by a class, including it's superclasses
+//but excluding overridden classes
+//Only classes in the input are considered for the superclass calculations
+//Authored by: Ewart Stone c3350508
+//Modified: 15/5/2023
+
 
 public class ResponseForClassChk
 {
     //Public Methods
+
+    //constructor
     public ResponseForClassChk()
     {
         //init class vars
         ctClassMap = new HashMap<>();
-
-
     }
 
+    //preconditions: launcher is initialised with a valid java file or folder input
+    //postconditions: stores and populates responseforclass map with items containing the
+        //response for class values and information of each class in the inpute
     public void check(Launcher launcher)
     {
+        //get classes
         List<CtClass<?>> classInput = Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class));
 
-        //for each class perform a coupling check
+        //for each class perform a rfc computation
         for(CtClass c: classInput)
         {
             responseForClassComputation(c);
@@ -50,26 +60,23 @@ public class ResponseForClassChk
         }
     }
 
+    //precondition: ctClass is a non null ctClass object
+    //postcondition: creates and stores a ResponseForClass object in the class map
+        //with dual hashmap trees describing the methods initialised in each method of the class code
     public void responseForClassComputation(CtClass<?> ctClass)
     {
-        //recorded methods hashmap
-        HashMap<String, Integer> recordedMethods = new HashMap<>();
-
-        int rfc = 0;
-        //for each method
-            //count method
-            //count unique invocations
-
+        //create new object and set super class
         ResponseForClass rfcObj = new ResponseForClass(ctClass.getQualifiedName());
 
         if(ctClass.getSuperclass() != null)
             rfcObj.setSuperClassStr(ctClass.getSuperclass().toString());
 
-        rfcObj.setRecordedMethods(recordedMethods);
 
         //System.out.println(ctClass.getQualifiedName() + " " + ctClass.getSuperclass());
 
 
+        //for each constructor
+            //parse and add parsed method tree to rfcObj
         for(CtConstructor constructor : ctClass.getElements(new TypeFilter<>(CtConstructor.class)))
         {
             //System.out.println("Adding: " + constructor.toString());
@@ -80,6 +87,7 @@ public class ResponseForClassChk
 
             List<Object> params = constructor.getParameters();
 
+            //parse constructor params and create id
             for(int i = 0; i < params.size(); i++)
             {
                 constructorId += params.get(i).toString().substring(0, params.get(i).toString().indexOf(" "));
@@ -91,8 +99,8 @@ public class ResponseForClassChk
             }
             constructorId += ")";
 
-            recordedMethods.put(constructorId, 0);
 
+            //for each method invocation that is not a super() constructor ref, add to method tree in rfcObj
             for(CtInvocation invoc : constructor.getElements(new TypeFilter<>(CtInvocation.class)))
             {
                 if(!invoc.toString().equals("super()"))
@@ -100,10 +108,10 @@ public class ResponseForClassChk
                     String invocStr = invoc.getDirectChildren().get(0) + "." + invoc.getDirectChildren().get(1);
 
                     methodInvocations.put(invocStr, 0);
-                    recordedMethods.put(invocStr, 0);
                 }
             }
 
+            //for each constructor call add to method tree in rfcObj
             for(CtConstructorCall constructorCall : constructor.getElements(new TypeFilter<>(CtConstructorCall.class)))
             {
                 String constructorInvocId = constructorCall.toString().substring(constructorCall.toString().indexOf(" ") + 1);
@@ -111,13 +119,16 @@ public class ResponseForClassChk
                 methodInvocations.put(constructorInvocId, 0);
             }
 
+            //store method tree parsed from constructor in rfcObj
             rfcObj.addMethod(constructorId, methodInvocations);
         }
 
+        //for each method definition in the class
         for(CtMethod method : ctClass.getElements(new TypeFilter<>(CtMethod.class)))
         {
             HashMap<String, Integer> methodInvocations = new HashMap<>();
 
+            //parse and created string id for the method
             String methodStr = ctClass.getQualifiedName() + "." + method.getSimpleName() + "(";
 
             List<CtElement> methChildren = method.getDirectChildren();
@@ -132,19 +143,15 @@ public class ResponseForClassChk
             methodStr += ")";
 
 
-            if(!recordedMethods.containsKey(methodStr))
-            {
-                recordedMethods.put(methodStr, 0);
-            }
-
+            //add each invocation in the class to the method parse map
             for(CtInvocation invoc : method.getElements(new TypeFilter<>(CtInvocation.class)))
             {
                 String invocStr = invoc.getDirectChildren().get(0) + "." + invoc.getDirectChildren().get(1);
 
                 methodInvocations.put(invocStr, 0);
-                recordedMethods.put(invocStr, 0);
             }
 
+            //add each constructor call in the class to the method parse map
             for(CtConstructorCall constructorCall : method.getElements(new TypeFilter<>(CtConstructorCall.class)))
             {
                 String constructorInvocId = constructorCall.toString().substring(constructorCall.toString().indexOf(" ") + 1);
@@ -152,12 +159,16 @@ public class ResponseForClassChk
                 methodInvocations.put(constructorInvocId, 0);
             }
 
+            //add method parse map to the rfc Object
             rfcObj.addMethod(methodStr, methodInvocations);
         }
 
+        //store class object with the class name in the ctClassMap
         ctClassMap.put(ctClass.getQualifiedName(), rfcObj);
     }
 
+    //preconditions: responseForClassComputation has been completed for a valid set of classes
+    //postconditions: outputs a map with each class and it's RFC value
     public Map<String, Integer> getResponseForClass()
     {
         Map<String, Integer> out = new HashMap<>();

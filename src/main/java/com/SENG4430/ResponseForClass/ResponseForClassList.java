@@ -5,10 +5,17 @@ import spoon.Launcher;
 
 import java.util.Map;
 
+//This class is called by the main program execution and calls the rfc check class
+//and then converts the output information from the response for class chk class to json output for the main program
+//Authored by: Ewart Stone c3350508
+//Modified: 15/5/2023
+
+
 public class ResponseForClassList extends MetricsList
 {
-    private final ResponseForClassChk responseForClassChk;
+    //public methods
 
+    //constructor
     public ResponseForClassList(String[] args) { responseForClassChk = new ResponseForClassChk(); }
 
     /**
@@ -18,6 +25,8 @@ public class ResponseForClassList extends MetricsList
     @Override
     public void execute(Launcher launcher) { responseForClassChk.check(launcher); }
 
+    //preconditon: responseForClassChk.check has been executed
+    //postcondition: outputs the classes and their rfc values in json form
     public String toJson()
     {
         //init json string with class coupling as root
@@ -31,4 +40,7 @@ public class ResponseForClassList extends MetricsList
 
         return json;
     }
+
+    //private vars
+    private final ResponseForClassChk responseForClassChk;
 }
