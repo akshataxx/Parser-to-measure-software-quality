@@ -1,3 +1,9 @@
+/*
+* Developer: Akshata Dhuraji
+* Program Name: HalsteadComplexityList
+* Description: This program creates an instance of HalsteadComplexityChk class to measure Halstead complexity of
+* given file passed as input by TestApplication and returns the Halstead complexity values in printable format
+ */
 package com.SENG4430.HalsteadComplexity;
 
 import com.SENG4430.MetricsList;

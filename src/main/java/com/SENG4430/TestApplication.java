@@ -113,8 +113,6 @@ public class TestApplication {
                 }
                 else if (arr[i].equals("rfc")) {
                     userSelectedMetrics = new ResponseForClassList(Arrays.copyOfRange(arr, 1, arr.length));
-                }
-                else {
                 }else if (arr[i].equals("fanin_fanout")) {
                     userSelectedMetrics = new FanInOutList(Arrays.copyOfRange(arr, 1, arr.length));
                 }else if (arr[i].equals("comments")) {
