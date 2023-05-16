@@ -13,6 +13,8 @@
 package com.SENG4430;
 
 import com.SENG4430.ClassCoupling.ClassCouplingList;
+import com.SENG4430.Comments.CommentsList;
+import com.SENG4430.Fan.FanInOutList;
 import com.SENG4430.FogIndex.FogIndexList;
 import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
 import com.SENG4430.PlainTextCredentials.PlainTextCredentialsList;
@@ -111,8 +113,11 @@ public class TestApplication {
                 }
                 else if (arr[i].equals("rfc")) {
                     userSelectedMetrics = new ResponseForClassList(Arrays.copyOfRange(arr, 1, arr.length));
-                }
-                else {
+                }else if (arr[i].equals("fanin_fanout")) {
+                    userSelectedMetrics = new FanInOutList(Arrays.copyOfRange(arr, 1, arr.length));
+                }else if (arr[i].equals("comments")) {
+                    userSelectedMetrics = new CommentsList(Arrays.copyOfRange(arr, 1, arr.length));
+                } else {
                     throw new IllegalArgumentException("Invalid " + arr[i] + " metrics argument");
                 }
                 metricLists.add(userSelectedMetrics);
