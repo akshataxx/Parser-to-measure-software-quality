@@ -1,5 +1,18 @@
+/*
+ * Developer: Akshata Dhuraji
+ * Program Name: TestApplication
+ * Description: Test Application class , reads 5 inputs at runtime in the form of arguments:
+ * 1) path/file name of the program on which various metrics should be run
+ * 2) -m denotes the metrics names
+ * 3) metrics name , it can have single or multiple metrics names in the user defined order
+ * 4) -t denotes the result option
+ * 5) cmd denotes print on command line
+ * The input is validated and listed metrics functionalities are invoked.
+ * Results of the various metrics are printed in the same order via passing the results to print package
+ */
 package com.SENG4430;
 
+import com.SENG4430.ClassCoupling.ClassCouplingList;
 import com.SENG4430.Comments.CommentsList;
 import com.SENG4430.Fan.FanInOutList;
 import com.SENG4430.FogIndex.FogIndexList;
@@ -7,6 +20,7 @@ import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
 import com.SENG4430.PlainTextCredentials.PlainTextCredentialsList;
 import com.SENG4430.Print.commandLinePrintResults;
 
+import com.SENG4430.ResponseForClass.ResponseForClassList;
 import com.SENG4430.WeightedMethods.WeightedMethodsList;
 import org.apache.commons.cli.*;
 import spoon.Launcher;
@@ -15,13 +29,13 @@ import spoon.reflect.declaration.CtElement;
 import java.util.*;
 public class TestApplication {
     private static Launcher launcher;   // launchers used by metrics
-    private static LinkedList<MetricsList> metricLists; // list of all metrics
-    private static  LinkedList<TestResult> testresults; //list all metrics results
+    static LinkedList<MetricsList> metricLists; // list of all metrics
+    static  LinkedList<TestResult> testresults; //list all metrics results
 
     //TO DO: Based on the feedback received enhance the below code to allow metrics to be
     // to be routed to an output file and output file to be displayed
     public static void main(String[] args ) {
-        if (args.length < 4) {
+        if (args.length < 3) {
             System.out.println("Error: Please give correct Arguments");
             System.out.println("Correct Arguments should be: SourceFileOrDirectory -m metric-flag -r result-flag");
             System.exit(1);
@@ -32,7 +46,7 @@ public class TestApplication {
         create(metricResults);                          // pass metric results for printing it
     }
 
-    private static Launcher processArgs(String[] args) {
+    public static Launcher processArgs(String[] args) {
         // Add command line options
         Options opt = new Options();
         Option metricOption = new Option("m", true, "metrics name");
@@ -68,7 +82,6 @@ public class TestApplication {
                 break;
             }
         }
-       // System.out.println( "code has comments ? " + hasComments); //Debug Statement
         launcher.getEnvironment().setCommentEnabled(hasComments);
         return launcher;
     }
@@ -79,7 +92,7 @@ public class TestApplication {
     }
 
     // create the corresponding metric list for each metric passed
-    private static void createMetrics(String[] metricDefinitions) {
+    public static void createMetrics(String[] metricDefinitions) {
         metricLists = new LinkedList<>();
         for (String mdefinition : metricDefinitions) {
             String[] arr = mdefinition.split(" ");
@@ -94,6 +107,14 @@ public class TestApplication {
                     userSelectedMetrics = new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length));
                 }else if (arr[i].equals("plaintext_credentials")) {
                     userSelectedMetrics = new PlainTextCredentialsList(Arrays.copyOfRange(arr, 1, arr.length));
+                }
+                else if (arr[i].equals("class_coupling")) {
+                    userSelectedMetrics = new ClassCouplingList(Arrays.copyOfRange(arr, 1, arr.length));
+                }
+                else if (arr[i].equals("rfc")) {
+                    userSelectedMetrics = new ResponseForClassList(Arrays.copyOfRange(arr, 1, arr.length));
+                }
+                else {
                 }else if (arr[i].equals("fanin_fanout")) {
                     userSelectedMetrics = new FanInOutList(Arrays.copyOfRange(arr, 1, arr.length));
                 }else if (arr[i].equals("comments")) {
@@ -105,12 +126,12 @@ public class TestApplication {
             }
         }
     }
-    private static void executeMetrics(Launcher launcher) {
+    public static void executeMetrics(Launcher launcher) {
         for (MetricsList userSelectedMetrics : metricLists) {
             userSelectedMetrics.execute(launcher);
         }
     }
-    private static LinkedList<String> getResults() {
+    public static LinkedList<String> getResults() {
         LinkedList<String> results = new LinkedList<String>();
         // sort the metric trackers, this is done so that system testing
         // has same order of the metrics output
@@ -121,7 +142,7 @@ public class TestApplication {
         return results;
     }
 
-    private static void testResults (String[] testResultsDtl) {
+    public static void testResults (String[] testResultsDtl) {
         testresults = new LinkedList<>();
         int i = 0;
         while (i < testResultsDtl.length){
@@ -141,7 +162,7 @@ public class TestApplication {
     }
     //TO DO: Enhance the program to take input as multiple metrics
     //for this print program is already enhanced to have linkedlist
-    private static void create(LinkedList<String> resultlist) {
+    public static void create(LinkedList<String> resultlist) {
         Iterator<TestResult> iterator = testresults.iterator();
         while (iterator.hasNext()) {
             TestResult result = iterator.next();
