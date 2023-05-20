@@ -1,3 +1,10 @@
+/*****************************************************************************************************
+ Student: Daniel Beiers
+ UID: c3039134
+ Course: SENG4430 Software Quality
+ Assessment: Assignment 2
+ ****************************************************************************************************/
+
 package com.SENG4430.Comments.CommentTests;
 
 public class CommentTestClass {
