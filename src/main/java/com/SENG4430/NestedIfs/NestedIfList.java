@@ -4,6 +4,9 @@ import com.SENG4430.MetricsList;
 import org.apache.commons.cli.*;
 import spoon.Launcher;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class NestedIfList extends MetricsList {
     private final NestedIfsChk nestedIfsChk;
@@ -32,7 +35,16 @@ public class NestedIfList extends MetricsList {
     @Override
     public String toJson() {
         // Convert the nested if scores to JSON format
-        return nestedIfsChk.getNestedIfsScoredForClassJson();
+        String json = "Depth of nested ifs: ";
+
+        for (Map.Entry<String, HashMap<String, Integer>> entry
+                : nestedIfsChk.getNestedIfsScoresForClass().entrySet()) {
+            json += "\n\t\tClass Name: "+ entry.getKey() + "\n\t\tDepth: " + entry.getValue();
+        }
+
+        json += "\n";
+        // Return the complete JSON string
+        return json;
     }
 
     // Parse the command line arguments

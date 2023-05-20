@@ -1,7 +1,5 @@
 package com.SENG4430.NestedIfs;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import spoon.reflect.code.CtIf;
 import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
@@ -27,11 +25,6 @@ public class NestedIfsChk {
     public NestedIfsChk(final int minimumIfStatementDepth) {
         nestedIfsLimit = minimumIfStatementDepth;
         nestedIfsScoresForClass = new HashMap<>();
-    }
-
-    // Get nested if scores for each class in JSON format
-    public String getNestedIfsScoredForClassJson() {
-        return getNestedIfsScoresJson(true);
     }
 
     // Get nested if scores for each class as a HashMap
@@ -66,17 +59,17 @@ public class NestedIfsChk {
     public void check(Launcher launcher) {
         // Get all the classes present in the source code
         for (CtClass<?> classObject : Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class))) {
-            HashMap<String, Integer> methodConditionalNestingScores = new HashMap<>();
+            HashMap<String, Integer> methodNestedIfScores = new HashMap<>();
 
             // Get all the methods present in the source code
             for (CtExecutable<?> methodObject : getMethods(classObject)) {
                 // Calculate the maximum depth of nested if statements in the method
                 int maxDepth = doDepth(methodObject);
-                methodConditionalNestingScores.put(methodObject.getSimpleName(), maxDepth);
+                methodNestedIfScores.put(methodObject.getSimpleName(), maxDepth);
             }
 
             // Add class and its nested if scores to the overall nested if scores
-            nestedIfsScoresForClass.put("Class: " + classObject.getQualifiedName(), methodConditionalNestingScores);
+            nestedIfsScoresForClass.put(classObject.getQualifiedName(), methodNestedIfScores);
         }
     }
 
@@ -183,22 +176,5 @@ public class NestedIfsChk {
     private ArrayList<CtExecutable<?>> getConstructors(CtClass<?> classObject) {
         Set<? extends CtConstructor<?>> constructorCollection = classObject.getConstructors();
         return new ArrayList<>(constructorCollection);
-    }
-
-    // Generate JSON string for nested if scores
-    private String getNestedIfsScoresJson(boolean prettyPrinting) {
-        HashMap<String, HashMap<String, Integer>> finalNestedIfsScoresForClass = getNestedIfsScoresForClass();
-        HashMap<String, HashMap<String, HashMap<String, Integer>>> finalNestedIfsScoresForClassDescription = new HashMap<>();
-        finalNestedIfsScoresForClassDescription.put(
-                String.format("Depth of Nested Ifs where nesting is %s or more", nestedIfsLimit),
-                finalNestedIfsScoresForClass
-        );
-
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        if (prettyPrinting) {
-            gsonBuilder.setPrettyPrinting();
-        }
-        Gson gson = gsonBuilder.create();
-        return gson.toJson(finalNestedIfsScoresForClassDescription);
     }
 }
