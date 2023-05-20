@@ -1,9 +1,23 @@
+/*****************************************************************************************************
+ Student: Daniel Beiers
+ UID: c3039134
+ Course: SENG4430 Software Quality
+ Assessment: Assignment 2
+ ****************************************************************************************************/
 package com.SENG4430.Fan;
 import com.SENG4430.MetricsList;
 import spoon.Launcher;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+
+/*********************************************************************************************************
+ This class is the metrics collection, Spoon execution point and metrics string builder.
+ From here the main application can call the comments collection class and return the
+ metric as a string in the format required of the main application.
+ If the format changes, this class can be modified to change how the results are processed,
+ allowing for scalability and abstraction.
+ *********************************************************************************************************/
 
 public class FanInOutList extends MetricsList {
 
