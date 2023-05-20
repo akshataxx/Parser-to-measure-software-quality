@@ -6,7 +6,7 @@ import spoon.Launcher;
 
 
 public class NestedIfList extends MetricsList {
-    private NestedIfsChk nestedIfsChk;
+    private final NestedIfsChk nestedIfsChk;
 
     // Constructor
     public NestedIfList(String[] args) {

@@ -13,9 +13,9 @@ import java.util.*;
 
 public class NestedIfsChk {
     // Depth limit for nested if statements
-    private int nestedIfsLimit;
+    private final int nestedIfsLimit;
     // Stores nested if scores for each class
-    private HashMap<String, HashMap<String, Integer>> nestedIfsScoresForClass;
+    private final HashMap<String, HashMap<String, Integer>> nestedIfsScoresForClass;
 
     // Default constructor
     public NestedIfsChk() {
