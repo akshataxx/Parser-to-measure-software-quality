@@ -18,6 +18,7 @@ import com.SENG4430.DepthInheritanceTree.DepthInheritanceTreeList;
 import com.SENG4430.Fan.FanInOutList;
 import com.SENG4430.FogIndex.FogIndexList;
 import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
+import com.SENG4430.LengthOfIdentifiers.LengthOfIdentifiersList;
 import com.SENG4430.NestedIfs.NestedIfList;
 import com.SENG4430.NumberOfChildren.NumberOfChildrenList;
 import com.SENG4430.PlainTextCredentials.PlainTextCredentialsList;
@@ -112,6 +113,8 @@ public class TestApplication {
                     userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else if (arr[i].equals("halstead_complexity")) {
                     userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
+                } else if (arr[i].equals("length_of_identifiers")) {
+                    userSelectedMetrics = new LengthOfIdentifiersList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else if (arr[i].equals("nested_ifs")) {
                     userSelectedMetrics = new NestedIfList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else if (arr[i].equals("weighted_methods")) {

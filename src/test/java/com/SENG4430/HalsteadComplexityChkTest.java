@@ -7,17 +7,13 @@ package com.SENG4430;
 import com.SENG4430.HalsteadComplexity.HalsteadComplexityChk;
 import org.junit.Test;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import spoon.Launcher;
 
 public class HalsteadComplexityChkTest {
     @Test
     public void testCheck() {
-        // Create an instance of HalsteadComplexityChk
-        HalsteadComplexityChk halsteadComplexityChk = new HalsteadComplexityChk();
-
-        // Create a launcher for your program
-        Launcher launcher = new Launcher();
+        HalsteadComplexityChk halsteadComplexityChk = new HalsteadComplexityChk(); // Create an instance of HalsteadComplexityChk
+        Launcher launcher = new Launcher();    // Create a launcher for your program
         launcher.addInputResource("D:/Software Quality/testResult.java");
 
         // Call the check method of HalsteadComplexityChk class with the launcher instance

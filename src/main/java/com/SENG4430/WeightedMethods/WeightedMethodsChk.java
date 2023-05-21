@@ -1,3 +1,11 @@
+/*
+ * Developer: Don Manula Ransika Udugahapattuwa
+ * Student ID: C3410266
+ * Program Name: WeightedMethodsChk.java
+ * Description: Program calculates the weight of each method, compares them with a set threshold and warns the developer
+ * which methods need refactoring.
+ */
+
 package com.SENG4430.WeightedMethods;
 
 import org.apache.maven.shared.invoker.SystemOutHandler;
@@ -66,5 +74,14 @@ public class WeightedMethodsChk {
         List<CtCase> cases = methodBody.getElements(new TypeFilter<>(CtCase.class));
         complexity += ifs.size() + loops.size() + cases.size();
         return complexity;
+    }
+
+    public boolean isThresholdExceeded(double threshold) {
+        for (Map.Entry<String, Double> entry : classWeightedMethodsChk) {
+            if (entry.getValue() > threshold) {
+                return true;
+            }
+        }
+        return false;
     }
 }
