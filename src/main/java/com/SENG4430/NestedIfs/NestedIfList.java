@@ -67,7 +67,7 @@ public class NestedIfList extends MetricsList {
             try {
                 minDepth = Integer.parseInt(minDepthString);
             } catch (NumberFormatException e) {
-                System.out.println("-depth flag value is not an integer");
+                System.out.println("nested if depth value must be an integer");
                 System.exit(1);
             }
         }
