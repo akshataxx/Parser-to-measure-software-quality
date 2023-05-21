@@ -6,6 +6,7 @@ import java.util.Map;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -27,18 +28,23 @@ public class NumberOfChildrenChk {
     public void check(Launcher launcher) {
         // Loop through all the classes in the code using Spoon framework
         for (CtClass<?> classObject : Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class))) {
-
-            int numberOfChildren = calculateNumberOfChildren(classObject);
-            numberOfChildrenChk
-                    .add(new java.util.AbstractMap.SimpleEntry<>(classObject.getSimpleName(), numberOfChildren));
+            if (!classObject.isInterface()) {
+                int numberOfChildren = calculateNumberOfChildren(classObject);
+                numberOfChildrenChk
+                        .add(new java.util.AbstractMap.SimpleEntry<>(classObject.getSimpleName(), numberOfChildren));
+            }
         }
 
     }
 
     private int calculateNumberOfChildren(CtClass<?> ctClass) {
         int numberOfChildren = 0;
-        for (CtElement element : ctClass.getPackage().getElements(new TypeFilter<>(ctClass.getClass()))) {
-            if (element instanceof CtClass && ((CtClass<?>) element).getSuperclass() == ctClass) {
+        for (CtElement element : ctClass.getPackage().getElements(new TypeFilter<>(CtClass.class))) {
+            System.out.println("elem: "  + ((CtClass<?>) element).getSuperclass());
+
+            CtTypeReference<?> superClass =  ((CtClass<?>) element).getSuperclass();
+            
+            if (element instanceof CtClass && superClass != null && superClass.getQualifiedName().equals(ctClass.getQualifiedName())) {
                 numberOfChildren++;
             }
         }
