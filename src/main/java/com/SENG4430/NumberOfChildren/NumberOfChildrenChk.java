@@ -22,11 +22,8 @@ public class NumberOfChildrenChk {
         return numberOfChildrenChk;
     }
 
-    /**
-     * Method to assess the code using Spoon framework
-     */
     public void check(Launcher launcher) {
-        // Loop through all the classes in the code using Spoon framework
+        // Loop through all the classes in the code
         for (CtClass<?> classObject : Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class))) {
             if (!classObject.isInterface()) {
                 int numberOfChildren = calculateNumberOfChildren(classObject);
@@ -36,15 +33,20 @@ public class NumberOfChildrenChk {
         }
 
     }
-
-    private int calculateNumberOfChildren(CtClass<?> ctClass) {
+    /**
+     * Calculates the number of direct children for a given class.
+     *
+     * @param classObject The CtClass representing the class to calculate the number of children for.
+     * @return The number of direct children for the class.
+     */
+    private int calculateNumberOfChildren(CtClass<?> classObject) {
         int numberOfChildren = 0;
-        for (CtElement element : ctClass.getPackage().getElements(new TypeFilter<>(CtClass.class))) {
-            System.out.println("elem: "  + ((CtClass<?>) element).getSuperclass());
+        for (CtElement element : classObject.getPackage().getElements(new TypeFilter<>(CtClass.class))) {
 
             CtTypeReference<?> superClass =  ((CtClass<?>) element).getSuperclass();
-            
-            if (element instanceof CtClass && superClass != null && superClass.getQualifiedName().equals(ctClass.getQualifiedName())) {
+
+            // Check if the element has a superclass and its superclass is the current class
+            if (superClass != null && superClass.getQualifiedName().equals(classObject.getQualifiedName())) {
                 numberOfChildren++;
             }
         }
