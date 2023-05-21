@@ -5,6 +5,7 @@ import java.util.Map;
 
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -27,11 +28,21 @@ public class NumberOfChildrenChk {
         // Loop through all the classes in the code using Spoon framework
         for (CtClass<?> classObject : Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class))) {
 
-            int numberOfChildren = classObject.getNestedTypes().size();
+            int numberOfChildren = calculateNumberOfChildren(classObject);
             numberOfChildrenChk
                     .add(new java.util.AbstractMap.SimpleEntry<>(classObject.getSimpleName(), numberOfChildren));
         }
 
+    }
+
+    private int calculateNumberOfChildren(CtClass<?> ctClass) {
+        int numberOfChildren = 0;
+        for (CtElement element : ctClass.getPackage().getElements(new TypeFilter<>(ctClass.getClass()))) {
+            if (element instanceof CtClass && ((CtClass<?>) element).getSuperclass() == ctClass) {
+                numberOfChildren++;
+            }
+        }
+        return numberOfChildren;
     }
 
 }
