@@ -21,8 +21,11 @@ public class DepthInheritanceTreeChk {
         return depthInheritanceTreeCheck;
     }
 
+    /**
+     * Method to assess the code using Spoon framework
+     */
     public void check(Launcher launcher) {
-        // Loop through all the classes in the code
+        // Loop through all the classes in the code using Spoon framework
         for (CtClass<?> classObject : Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class))) {
 
             int depthOfInheritanceTree = calculateDepthOfInheritanceTree(classObject);
@@ -32,14 +35,7 @@ public class DepthInheritanceTreeChk {
 
     }
 
-
-    /**
-     * Calculates the depth of inheritance tree for a given class.
-     *
-     * @param classObject The CtClass representing the class to calculate the depth for.
-     * @return The depth of inheritance tree for the class.
-     */
-    private int calculateDepthOfInheritanceTree(CtClass<?> classObject) {
+    private static int calculateDepthOfInheritanceTree(CtClass<?> classObject) {
         int depth = 0;
         while (classObject.getSuperclass() != null) {
             depth++;
