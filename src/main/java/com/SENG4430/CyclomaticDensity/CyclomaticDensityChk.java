@@ -72,30 +72,33 @@ public class CyclomaticDensityChk {
         int localComplexity = 0;
         int localTotal = 0;
 
-        for (CtStatement _statement : _method.getBody().getStatements())
-        // for each statement
+        if (_method.getBody() != null)
         {
-            String statement = _statement.toString();
-            Scanner scanner = new Scanner(statement);
+            for (CtStatement _statement : _method.getBody().getStatements())
+            // for each statement
+            {
+                String statement = _statement.toString();
+                Scanner scanner = new Scanner(statement);
 
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                line = line.replaceAll("\\s+", " ");
-                line = line.replaceAll("/\\*(?:.|[\\n\\r])*?\\*/", "");
-                line = line.replaceAll("//.*", "");
-                if (line.contains("if") || line.contains("for") || line.contains("while") || line.contains("switch") || localComplexity > 0)
-                // count any decision, or once a decision has been found
-                {
-                    localComplexity++;
-                    complexity++;
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    line = line.replaceAll("\\s+", " ");
+                    line = line.replaceAll("/\\*(?:.|[\\n\\r])*?\\*/", "");
+                    line = line.replaceAll("//.*", "");
+                    if (line.contains("if") || line.contains("for") || line.contains("while") || line.contains("switch") || localComplexity > 0)
+                    // count any decision, or once a decision has been found
+                    {
+                        localComplexity++;
+                        complexity++;
+                    }
+                    total++;
+                    localTotal++;
                 }
-                total++;
-                localTotal++;
             }
-        }
-        if (localComplexity > 0 || localTotal > 0)
-        {
-            density += ""+ _method.getSimpleName()+" ("+ String.format("%.0f%%", getPcent(localComplexity,localTotal))+"), ";
+            if (localComplexity > 0 || localTotal > 0)
+            {
+                density += ""+ _method.getSimpleName()+" ("+ String.format("%.0f%%", getPcent(localComplexity,localTotal))+"), ";
+            }
         }
     }
 }
