@@ -5,6 +5,7 @@ import java.util.Map;
 
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.visitor.Query;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -38,7 +39,8 @@ public class DepthInheritanceTreeChk {
         int depth = 0;
         while (classObject.getSuperclass() != null) {
             depth++;
-            classObject = (CtClass<?>) classObject.getSuperclass();
+            CtType<?> ctType = classObject.getSuperclass().getTypeDeclaration();
+            classObject = (CtClass<?>) ctType;
         }
         return depth;
     }
