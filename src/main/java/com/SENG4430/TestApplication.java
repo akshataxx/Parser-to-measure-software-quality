@@ -18,6 +18,8 @@ import com.SENG4430.DepthInheritanceTree.DepthInheritanceTreeList;
 import com.SENG4430.Fan.FanInOutList;
 import com.SENG4430.FogIndex.FogIndexList;
 import com.SENG4430.HalsteadComplexity.HalsteadComplexityList;
+import com.SENG4430.CyclomaticComplexity.CyclomaticComplexityList;
+import com.SENG4430.CyclomaticDensity.CyclomaticDensityList;
 import com.SENG4430.LengthOfIdentifiers.LengthOfIdentifiersList;
 import com.SENG4430.NestedIfs.NestedIfList;
 import com.SENG4430.NumberOfChildren.NumberOfChildrenList;
@@ -117,6 +119,10 @@ public class TestApplication {
                     userSelectedMetrics = new LengthOfIdentifiersList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else if (arr[i].equals("nested_ifs")) {
                     userSelectedMetrics = new NestedIfList(Arrays.copyOfRange(arr, 1, arr.length));
+                } else if (arr[i].equals("cyclomatic_complexity")) {
+                    userSelectedMetrics = new CyclomaticComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
+                } else if (arr[i].equals("cyclomatic_density")) {
+                    userSelectedMetrics = new CyclomaticDensityList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else if (arr[i].equals("weighted_methods")) {
                     userSelectedMetrics = new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length));
                 } else if (arr[i].equals("plaintext_credentials")) {
