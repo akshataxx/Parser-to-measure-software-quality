@@ -2,6 +2,7 @@
  * Developer: Akshata Dhuraji
  * Program Name: JunitTestSuite.java
  * Description: Program to list down test suite classes to be executed
+ * Reference used : https://www.guru99.com/create-junit-test-suite.html
  */
 package com.SENG4430;
 import org.junit.runner.RunWith;
@@ -14,5 +15,5 @@ import org.junit.runners.Suite;
         FogIndexChkTest.class             // calls FogIndexChkTest class for execution
 })
 public class JunitTestSuite {
-    //left blank
+    // left blank as it is used only as a holder for the above annotations
 }
