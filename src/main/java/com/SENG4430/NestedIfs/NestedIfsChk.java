@@ -29,6 +29,10 @@ public class NestedIfsChk {
         nestedIfsScoresForClass = new HashMap<>();
     }
 
+    public int getNestedIfsLimit() {
+        return nestedIfsLimit;
+    }
+
     // Get nested if scores for each class as a HashMap
     public HashMap<String, HashMap<String, Integer>> getNestedIfsScoresForClass() {
         HashMap<String, HashMap<String, Integer>> finalNestedIfsScoresForClass = new HashMap<>();

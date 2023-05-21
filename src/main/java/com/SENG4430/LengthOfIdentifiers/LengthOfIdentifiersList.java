@@ -10,6 +10,7 @@ import java.util.Map;
 public class LengthOfIdentifiersList extends MetricsList {
     private final LengthOfIdentifiersChk lengthOfIdentifiersChk;
 
+    // Constructor
     public LengthOfIdentifiersList(String[] args) {
         Options options = new Options();
         options.addOption("cutoff", true, "Noteworthy identifiers cutoff value to display");
@@ -41,11 +42,14 @@ public class LengthOfIdentifiersList extends MetricsList {
         json += "\n";
 
         // Add the Noteworthy identifiers object to the JSON string
-        json += "\n\t Noteworthy identifiers: ";
-        for (Map.Entry<String, List<String>> entry : lengthOfIdentifiersChk.getLengthOfIdentifiersLessThanOrEqualToCutoff().entrySet()) {
-            json += "\n\t\t Class Name: " + entry.getKey() + "\n\t\t Value(s): " + entry.getValue();
+        json += "\n\t Length of identifiers less than or equal to the cutoff: ";
+        for (Map.Entry<String, List<String>> entry
+                : lengthOfIdentifiersChk.getLengthOfIdentifiersLessThanOrEqualToCutoff().entrySet()) {
+            json += "\n\t\t Cut off Limit: " + lengthOfIdentifiersChk.getCutOffLimit()
+                    + "\n\t\t Class Name: " + entry.getKey() + "\n\t\t Value(s): " + entry.getValue();
         }
-
+        json += "\n";
+        // Return the complete JSON string
         return json;
     }
 

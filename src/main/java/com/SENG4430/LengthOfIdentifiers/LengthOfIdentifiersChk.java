@@ -44,6 +44,10 @@ public class LengthOfIdentifiersChk {
         return lengthOfIdentifiersLessThanOrEqualToCutoff;
     }
 
+    public int getCutOffLimit() {
+        return cutOffLimit;
+    }
+
     // Method that performs the Length of Identifiers check
     public void check(Launcher launcher) {
         List<CtClass<?>> clazz = Query.getElements(launcher.getFactory(), new TypeFilter<>(CtClass.class));
