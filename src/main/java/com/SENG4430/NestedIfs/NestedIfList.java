@@ -34,14 +34,14 @@ public class NestedIfList extends MetricsList {
 
     @Override
     public String toJson() {
-        // Convert the nested if scores to JSON format
-        String json = "Depth of nested ifs: ";
-
+        // Initialize the JSON string with the Nested Ifs root object
+        String json = "Nested Ifs: ";
+        json += "\n\t Depth of nested ifs: ";
         for (Map.Entry<String, HashMap<String, Integer>> entry
                 : nestedIfsChk.getNestedIfsScoresForClass().entrySet()) {
-            json += "\n\t\tClass Name: "+ entry.getKey() + "\n\t\tDepth: " + entry.getValue();
+            json += "\n\t\tMinimum depth limit: " + nestedIfsChk.getNestedIfsLimit()
+                    +"\n\t\tClass Name: "+ entry.getKey() + "\n\t\tDepth: " + entry.getValue();
         }
-
         json += "\n";
         // Return the complete JSON string
         return json;
@@ -67,7 +67,7 @@ public class NestedIfList extends MetricsList {
             try {
                 minDepth = Integer.parseInt(minDepthString);
             } catch (NumberFormatException e) {
-                System.out.println("-depth flag value is not an integer");
+                System.out.println("nested if depth value must be an integer");
                 System.exit(1);
             }
         }

@@ -10,6 +10,8 @@ import spoon.Launcher;
 import java.util.*;
 
 public class NestedIfsChk {
+    private static final int DEFAULT_MIN_DEPTH = 3;
+
     // Depth limit for nested if statements
     private final int nestedIfsLimit;
     // Stores nested if scores for each class
@@ -17,14 +19,18 @@ public class NestedIfsChk {
 
     // Default constructor
     public NestedIfsChk() {
-        // Default value for minimum if statement depth is 3
-        this(3);
+        // Uses the default min depth
+        this(DEFAULT_MIN_DEPTH);
     }
 
     // Constructor for when the minimum statement depth is set by user
     public NestedIfsChk(final int minimumIfStatementDepth) {
         nestedIfsLimit = minimumIfStatementDepth;
         nestedIfsScoresForClass = new HashMap<>();
+    }
+
+    public int getNestedIfsLimit() {
+        return nestedIfsLimit;
     }
 
     // Get nested if scores for each class as a HashMap
