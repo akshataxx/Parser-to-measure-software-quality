@@ -22,5 +22,5 @@ The program takes following arguments
 
 3) -r option list the output option by default output is routed to command prompt. below is the example of runtime arguments
 
-4) "D:\Software Quality\testResult.java" "-m" "fog_index halstead_complexity" "-r" "cmd"
+   "D:\Software Quality\testResult.java" "-m" "fog_index halstead_complexity" "-r" "cmd"
 
