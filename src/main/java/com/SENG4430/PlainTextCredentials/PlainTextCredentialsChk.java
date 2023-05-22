@@ -4,6 +4,8 @@
  * Program Name: PlainTextCredentialsChk.java
  * Description: Program Finds any plaintext credentials that can be a security vulnerability.
  * Outputs the method where the plaintext credentials are found, along with the credentials.
+ * Claim: Covers the security of the code by defending the program against credentials theft
+ * through plain text credentials vulnerability
  */
 
 package com.SENG4430.PlainTextCredentials;

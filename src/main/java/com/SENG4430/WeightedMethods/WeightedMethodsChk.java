@@ -4,6 +4,8 @@
  * Program Name: WeightedMethodsChk.java
  * Description: Program calculates the weight of each method, compares them with a set threshold and warns the developer
  * which methods need refactoring.
+ * measures the sum of complexity of the methods in a class. A predictor of the
+ * time and effort required to develop and maintain a class.
  */
 
 package com.SENG4430.WeightedMethods;
