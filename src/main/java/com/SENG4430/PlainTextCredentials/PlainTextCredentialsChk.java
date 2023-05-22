@@ -5,7 +5,9 @@
  * Description: Program Finds any plaintext credentials that can be a security vulnerability.
  * Outputs the method where the plaintext credentials are found, along with the credentials.
  * Claim: Covers the security of the code by defending the program against credentials theft
- * through plain text credentials vulnerability
+ * through plain text credentials vulnerability.
+ * Protects from Unauthorized Access, Credential Theft, Compromised Version Control Systems,
+ * Insider Threats, Lack of Accountability, Compliance Violation:PCI DSS, HIPAA
  */
 
 package com.SENG4430.PlainTextCredentials;
