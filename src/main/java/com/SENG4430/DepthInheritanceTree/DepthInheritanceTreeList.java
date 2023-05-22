@@ -28,7 +28,7 @@ public class DepthInheritanceTreeList extends MetricsList {
         jsonBuilder.append("{");
         jsonBuilder.append("\n");
         // Add the Depth Inheritance Tree object to the JSON string
-        jsonBuilder.append("Depth Inheritance Per Class\": {\n");
+        jsonBuilder.append("\"Depth Inheritance Per Class\": {\n");
         for (Map.Entry<String, Integer> entry : depthInheritanceTreeChk.getDepthInheritanceTreeCheck()) {
             jsonBuilder.append("\t\t\"" + entry.getKey() + "\": " + entry.getValue());
             jsonBuilder.append("\n");
