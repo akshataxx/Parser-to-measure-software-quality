@@ -134,7 +134,9 @@ public class ResponseForClassChk
             List<CtElement> methChildren = method.getDirectChildren();
             for(int i = 1; i < methChildren.size() - 1; i++)
             {
-                methodStr += methChildren.get(i).getDirectChildren().get(0).toString();
+                if(!methChildren.get(i).getDirectChildren().isEmpty()) {
+                    methodStr += methChildren.get(i).getDirectChildren().get(0).toString();
+                }
 
                 if(i + 1 != methChildren.size() - 1)
                     methodStr += ",";
