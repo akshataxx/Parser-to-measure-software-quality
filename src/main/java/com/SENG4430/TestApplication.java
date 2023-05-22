@@ -108,41 +108,60 @@ public class TestApplication {
         metricLists = new LinkedList<>();
         for (String mdefinition : metricDefinitions) {
             String[] arr = mdefinition.split(" ");
-            for (int i = 0; i < arr.length; i++) {
-                MetricsList userSelectedMetrics;
-                // Metrics list offered by the test application
-                if (arr[i].equals("fog_index")) {
-                    userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("halstead_complexity")) {
-                    userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("length_of_identifiers")) {
-                    userSelectedMetrics = new LengthOfIdentifiersList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("nested_ifs")) {
-                    userSelectedMetrics = new NestedIfList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("cyclomatic_complexity")) {
-                    userSelectedMetrics = new CyclomaticComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("cyclomatic_density")) {
-                    userSelectedMetrics = new CyclomaticDensityList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("weighted_methods")) {
-                    userSelectedMetrics = new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("plaintext_credentials")) {
-                    userSelectedMetrics = new PlainTextCredentialsList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("class_coupling")) {
-                    userSelectedMetrics = new ClassCouplingList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("rfc")) {
-                    userSelectedMetrics = new ResponseForClassList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("fanin_fanout")) {
-                    userSelectedMetrics = new FanInOutList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("comments")) {
-                    userSelectedMetrics = new CommentsList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("number_of_children")) {
-                    userSelectedMetrics = new NumberOfChildrenList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else if (arr[i].equals("depth_inheritance_tree")) {
-                    userSelectedMetrics = new DepthInheritanceTreeList(Arrays.copyOfRange(arr, 1, arr.length));
-                } else {
-                    throw new IllegalArgumentException("Invalid " + arr[i] + " metrics argument");
+            if(Objects.equals(arr[0], "all")){
+                metricLists.add(new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new LengthOfIdentifiersList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new LengthOfIdentifiersList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new NestedIfList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new CyclomaticComplexityList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new CyclomaticDensityList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new PlainTextCredentialsList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new ClassCouplingList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new ResponseForClassList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new FanInOutList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new CommentsList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new NumberOfChildrenList(Arrays.copyOfRange(arr, 1, arr.length)));
+                metricLists.add(new DepthInheritanceTreeList(Arrays.copyOfRange(arr, 1, arr.length)));
+
+            }else {
+                for (int i = 0; i < arr.length; i++) {
+                    MetricsList userSelectedMetrics;
+                    // Metrics list offered by the test application
+                    if (arr[i].equals("fog_index")) {
+                        userSelectedMetrics = new FogIndexList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("halstead_complexity")) {
+                        userSelectedMetrics = new HalsteadComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("length_of_identifiers")) {
+                        userSelectedMetrics = new LengthOfIdentifiersList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("nested_ifs")) {
+                        userSelectedMetrics = new NestedIfList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("cyclomatic_complexity")) {
+                        userSelectedMetrics = new CyclomaticComplexityList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("cyclomatic_density")) {
+                        userSelectedMetrics = new CyclomaticDensityList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("weighted_methods")) {
+                        userSelectedMetrics = new WeightedMethodsList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("plaintext_credentials")) {
+                        userSelectedMetrics = new PlainTextCredentialsList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("class_coupling")) {
+                        userSelectedMetrics = new ClassCouplingList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("rfc")) {
+                        userSelectedMetrics = new ResponseForClassList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("fanin_fanout")) {
+                        userSelectedMetrics = new FanInOutList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("comments")) {
+                        userSelectedMetrics = new CommentsList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("number_of_children")) {
+                        userSelectedMetrics = new NumberOfChildrenList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else if (arr[i].equals("depth_inheritance_tree")) {
+                        userSelectedMetrics = new DepthInheritanceTreeList(Arrays.copyOfRange(arr, 1, arr.length));
+                    } else {
+                        throw new IllegalArgumentException("Invalid " + arr[i] + " metrics argument");
+                    }
+                    metricLists.add(userSelectedMetrics);
                 }
-                metricLists.add(userSelectedMetrics);
             }
         }
     }
