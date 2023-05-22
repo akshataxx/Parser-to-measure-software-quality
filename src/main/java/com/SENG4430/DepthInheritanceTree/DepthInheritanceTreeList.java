@@ -25,15 +25,16 @@ public class DepthInheritanceTreeList extends MetricsList {
 
     public String toJson() {
         StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("\t\t},\n");
+        jsonBuilder.append("{");
         jsonBuilder.append("\n");
-        // Add the Number Of Children object to the JSON string
-        jsonBuilder.append("Depth Inheritance Per Class\": {\n");
+        // Add the Depth Inheritance Tree object to the JSON string
+        jsonBuilder.append("\"Depth Inheritance Per Class\": {\n");
         for (Map.Entry<String, Integer> entry : depthInheritanceTreeChk.getDepthInheritanceTreeCheck()) {
             jsonBuilder.append("\t\t\"" + entry.getKey() + "\": " + entry.getValue());
             jsonBuilder.append("\n");
         }
         jsonBuilder.append("\t\t}\n");
+        jsonBuilder.append("}");
         return jsonBuilder.toString();
     }
 }

@@ -37,14 +37,21 @@ public class NumberOfChildrenChk {
 
     }
 
-    private int calculateNumberOfChildren(CtClass<?> ctClass) {
+    /**
+     * Calculates the number of direct children for a given class.
+     *
+     * @param classObject The CtClass representing the class to calculate the number
+     *                    of children for.
+     * @return The number of direct children for the class.
+     */
+    private int calculateNumberOfChildren(CtClass<?> classObject) {
         int numberOfChildren = 0;
-        for (CtElement element : ctClass.getPackage().getElements(new TypeFilter<>(CtClass.class))) {
-            System.out.println("elem: "  + ((CtClass<?>) element).getSuperclass());
+        for (CtElement element : classObject.getPackage().getElements(new TypeFilter<>(CtClass.class))) {
 
-            CtTypeReference<?> superClass =  ((CtClass<?>) element).getSuperclass();
-            
-            if (element instanceof CtClass && superClass != null && superClass.getQualifiedName().equals(ctClass.getQualifiedName())) {
+            CtTypeReference<?> superClass = ((CtClass<?>) element).getSuperclass();
+
+            // Check if the element has a superclass and its superclass is the current class
+            if (superClass != null && superClass.getQualifiedName().equals(classObject.getQualifiedName())) {
                 numberOfChildren++;
             }
         }
