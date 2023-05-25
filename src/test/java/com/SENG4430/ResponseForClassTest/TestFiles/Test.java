@@ -1,4 +1,4 @@
-package com.SENG4430.ClassCoupling.TestFiles;
+package com.SENG4430.ResponseForClassTest.TestFiles;
 
 public class Test
 {

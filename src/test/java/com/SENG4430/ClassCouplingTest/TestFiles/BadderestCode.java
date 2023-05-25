@@ -1,10 +1,10 @@
-package com.SENG4430.ClassCoupling.TestFiles;
+package com.SENG4430.ClassCouplingTest.TestFiles;
 
 public class BadderestCode extends BaddestCode
 {
     public BadderestCode()
     {
-        int x = BaddestCode.getThree();
+        int x = getThree();
     }
 
     public static int getFour(char a, char b)
