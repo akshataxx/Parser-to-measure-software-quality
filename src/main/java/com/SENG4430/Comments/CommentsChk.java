@@ -20,6 +20,23 @@ import java.util.*;
  each class and method, including orphaned comments, i.e. comments that are outside of classes or don't have parents.
  The class is called via the 'commentChkLauncher' and iteratively adds a compounded map of class name, attributed comments,
  and a linked map of included method names and their own comments.
+
+ Code Readability: Comments enhance the readability and understandability of the code. Well-written comments provide
+ additional context, explanations, and clarifications about the code logic, algorithms, and intentions.
+
+ Collaboration and Teamwork: Comments facilitate collaboration among team members working on a project. When multiple
+ developers work on the same codebase, comments act as a means of communication. They allow developers to share
+ information, discuss ideas, and provide feedback within the code itself.
+
+ Documentation: Comments serve as a form of documentation within the code. They can explain the purpose of functions,
+ classes, or specific sections of the code, making it easier for others to grasp the code's functionality.
+
+ Code Maintenance and Debugging: Well-commented code is easier to maintain and debug. When encountering an issue or a
+ bug, developers can refer to the comments to gain insights into the code's behavior.
+
+ Code Reusability: Comments can indicate the potential reusability of specific code segments. By describing the purpose,
+ inputs, and outputs of a particular piece of code, developers can quickly determine if it can be reused in different
+ parts of the application or in future projects.
  *********************************************************************************************************/
 
 public class CommentsChk{

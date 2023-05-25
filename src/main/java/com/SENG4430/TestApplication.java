@@ -26,6 +26,7 @@ import com.SENG4430.NumberOfChildren.NumberOfChildrenList;
 import com.SENG4430.PlainTextCredentials.PlainTextCredentialsList;
 import com.SENG4430.Print.commandLinePrintResults;
 
+import com.SENG4430.Print.filePrintResults;
 import com.SENG4430.ResponseForClass.ResponseForClassList;
 import com.SENG4430.WeightedMethods.WeightedMethodsList;
 import org.apache.commons.cli.*;
@@ -193,7 +194,9 @@ public class TestApplication {
 
             if (arr[0].equals("cmd")) {
                 testresult = new commandLinePrintResults(Arrays.copyOfRange(arr, 1, arr.length));
-            } else {
+            } else if(arr[0].equals("file")){
+                testresult = new filePrintResults(Arrays.copyOfRange(arr, 1, arr.length));
+            }else {
                 throw new IllegalArgumentException("Invalid " + arr[0] + " Result");
             }
             testresults.add(testresult);

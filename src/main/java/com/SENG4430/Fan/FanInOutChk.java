@@ -18,13 +18,17 @@ import spoon.support.reflect.reference.CtExecutableReferenceImpl;
 import java.util.*;
 
 /*********************************************************************************************************
- This class allows for the parsing of a java project directory and the detection of all methods and their fan in and fan out properties.
- Fan-in represents the number of methods or functions that call a specific method or function. It measures how many other methods or functions rely on a particular method.
+ This class allows for the parsing of a java project directory and the detection of all methods and their fan in and fan
+ out properties.
+ Fan-in represents the number of methods or functions that call a specific method or function. It measures how many
+ other methods or functions rely on a particular method.
 - A high fan-in value indicates that a method is widely used and serves as a central point of functionality.
 - A low fan-in value may suggest that a method is less reusable or has limited usage within the codebase.
 
- Fan-out represents the number of methods or functions called by a specific method or function. It measures how many other methods or functions a particular method relies on.
-- A high fan-out value suggests that a method depends on multiple other methods, indicating potential complexity or coupling.
+ Fan-out represents the number of methods or functions called by a specific method or function. It measures how many
+ other methods or functions a particular method relies on.
+- A high fan-out value suggests that a method depends on multiple other methods, indicating potential complexity or
+ coupling.
 - A low fan-out value implies that a method has fewer dependencies and may be more focused or modular.
  *********************************************************************************************************/
 

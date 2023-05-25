@@ -24,3 +24,6 @@ The program takes following arguments
 
    "D:\Software Quality\testResult.java" "-m" "fog_index halstead_complexity" "-r" "cmd"
 
+``
+java ./target/classes/com/SENG4430/TestApplication "C:\Users\danie\IdeaProjects\Software-Quality\src\main\java\com\SENG4430" "-m" "fog_index halstead_complexity" "-r" "cmd"
+``
