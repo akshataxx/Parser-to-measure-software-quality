@@ -4,6 +4,8 @@
  * Description: Program for Unit testing of TestApplication class
  */
 package com.SENG4430;
+import com.SENG4430.TestApplication;
+import com.SENG4430.FogIndex.FogIndexList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -19,7 +21,7 @@ public class TestApplicationTest {
     @Test
     public void testProcessArgs() {
         String[] testArgs = {
-                "D:\\Software Quality\\testResult.java", "-m",
+                "src\\main\\java\\com\\SENG4430\\TestApplication.java", "-m",
                 "halstead_complexity fog_index", "-r","cmd"};
         Launcher launcher = TestApplication.processArgs(testArgs);
         assertNotNull(launcher);
@@ -34,8 +36,8 @@ public class TestApplicationTest {
     }
     @Test
     public void testExecuteMetrics() {
-        String[] testArgs = {"D:\\Software Quality\\testResult.java", "-m", "fog_index", "-r", "cmd"}; //Arguments passed
-        Launcher launcher = TestApplication.processArgs(testArgs); //pass testArguments to launcher
+        String[] testArgs = {"src\\main\\java\\com\\SENG4430\\TestApplication.java", "-m", "fog_index", "-r", "cmd"}; //Arguments passed
+        Launcher launcher = TestApplication.processArgs(testArgs);   //pass testArguments to launcher
         TestApplication.executeMetrics(launcher);                   //calls exeucuteMetrics of TestApplication class
         LinkedList<String> results = TestApplication.getResults();
         assertNotNull(results);

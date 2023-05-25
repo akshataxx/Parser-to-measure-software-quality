@@ -39,9 +39,7 @@ public class TestApplication {
     static LinkedList<MetricsList> metricLists; // list of all metrics
     static LinkedList<TestResult> testresults; // list all metrics results
 
-    // TO DO: Based on the feedback received enhance the below code to allow metrics
-    // to be
-    // to be routed to an output file and output file to be displayed
+    // main function to run the test application
     public static void main(String[] args) {
         if (args.length < 3) {
             System.out.println("Error: Please give correct Arguments");
@@ -146,13 +144,16 @@ public class TestApplication {
             }
         }
     }
-
+    // function to call user selected metrics
     public static void executeMetrics(Launcher launcher) {
         for (MetricsList userSelectedMetrics : metricLists) {
             userSelectedMetrics.execute(launcher);
         }
     }
 
+    /**
+     *   function to return results of metrics
+    */
     public static LinkedList<String> getResults() {
         LinkedList<String> results = new LinkedList<String>();
         // sort the metric trackers, this is done so that system testing
@@ -163,7 +164,9 @@ public class TestApplication {
         }
         return results;
     }
-
+   /**
+   * Function to pass the results to command line output
+   */
     public static void testResults(String[] testResultsDtl) {
         testresults = new LinkedList<>();
         int i = 0;
@@ -182,14 +185,16 @@ public class TestApplication {
         }
     }
 
-    // TO DO: Enhance the program to take input as multiple metrics
-    // for this print program is already enhanced to have linkedlist
+    /**
+     *
+     * @param resultlist = list of alll the metrics results
+     * Creates a list of all the metrics results requested by user
+     */
     public static void create(LinkedList<String> resultlist) {
         Iterator<TestResult> iterator = testresults.iterator();
         while (iterator.hasNext()) {
             TestResult result = iterator.next();
             result.create(resultlist);
-            ;
         }
     }
 }
