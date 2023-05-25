@@ -25,15 +25,16 @@ public class NumberOfChildrenList extends MetricsList {
 
     public String toJson() {
         StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("\t\t},\n");
+        jsonBuilder.append("{");
         jsonBuilder.append("\n");
         // Add the Number Of Children object to the JSON string
-        jsonBuilder.append("Number of Children Per Class\": {\n");
+        jsonBuilder.append("\"Number of Children Per Class\": {\n");
         for (Map.Entry<String, Integer> entry : numberOfChildrenChk.getNumberOfChildrenChk()) {
             jsonBuilder.append("\t\t\"" + entry.getKey() + "\": " + entry.getValue());
             jsonBuilder.append("\n");
         }
         jsonBuilder.append("\t\t}\n");
+        jsonBuilder.append("}");
         return jsonBuilder.toString();
     }
 }
