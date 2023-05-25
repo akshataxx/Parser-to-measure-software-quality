@@ -69,6 +69,7 @@ public class FogIndexChk {
         int numWords = 0;
         int numSentences = 0;
         int numComplexWords = 0;
+        double fogIndexOfFunction = 0.0;
         // If there are comments for the method, loop through all the comments
         if(!functionComments.isEmpty()) {
             for (CtComment comment : functionComments) {
@@ -76,17 +77,17 @@ public class FogIndexChk {
                 String commentContent = comment.getContent();
                 numWords += commentContent.split("\\s+").length;
                 numSentences += commentContent.split("[.!?]+").length;
-                //Debug code begins
+                /*Debug code begins
                 System.out.println("Comment: " + commentContent);
                 System.out.println("Num words: " + numWords);
                 System.out.println("Num sentences: " + numSentences);
-                //Debug code ends
+                //Debug code ends*/
                 // Count the number of complex words in the comment
                 numComplexWords += countComplexWords(commentContent);
             }
+            // Calculate the Fog Index for the comments using the formula
+            fogIndexOfFunction = 0.4 * ((numWords / (double) numSentences) + (100 * numComplexWords / (double) numWords));
         }
-        // Calculate the Fog Index for the comments using the formula
-        double fogIndexOfFunction = 0.4 * ((numWords / (double) numSentences) + (100 * numComplexWords / (double) numWords));
         return fogIndexOfFunction;
     }
 
