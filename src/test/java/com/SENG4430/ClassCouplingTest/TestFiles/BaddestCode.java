@@ -1,4 +1,4 @@
-package com.SENG4430.ClassCoupling.TestFiles;
+package com.SENG4430.ClassCouplingTest.TestFiles;
 
 public class BaddestCode {
     public BaddestCode()
@@ -6,6 +6,8 @@ public class BaddestCode {
         int b = 2;
     }
     public BaddestCode(int a) { int b = a; }
+
+    public static int getFour() {return 4; }
 
     public static int getFour(char a, char b) { return getThree() + 1; }
 

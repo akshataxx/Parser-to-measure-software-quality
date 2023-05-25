@@ -1,4 +1,4 @@
-package com.SENG4430.ClassCoupling.TestFiles;
+package com.SENG4430.ResponseForClassTest.TestFiles;
 
 public class BadCode {
     public BadCode()
@@ -15,4 +15,6 @@ public class BadCode {
     {
         return 2;
     }
+
+    public static int getOneButCool() { return 1 ;}
 }
