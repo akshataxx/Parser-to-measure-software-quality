@@ -14,7 +14,7 @@ public class HalsteadComplexityChkTest {
     public void testCheck() {
         HalsteadComplexityChk halsteadComplexityChk = new HalsteadComplexityChk(); // Create an instance of HalsteadComplexityChk
         Launcher launcher = new Launcher();    // Create a launcher for your program
-        launcher.addInputResource("D:/Software Quality/testResult.java");
+        launcher.addInputResource("src\\test\\java\\com\\SENG4430\\HalsteadComplexityChk.java");
 
         // Call the check method of HalsteadComplexityChk class with the launcher instance
         halsteadComplexityChk.check(launcher);

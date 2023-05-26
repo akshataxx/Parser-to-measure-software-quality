@@ -9,6 +9,7 @@ package com.SENG4430.FogIndex;
 import com.SENG4430.MetricsList;
 import spoon.Launcher;
 import java.lang.String;
+import java.util.*;
 
 /**
  * This class represents a list of metrics, which includes a Fog Index check.
@@ -41,12 +42,35 @@ public class FogIndexList extends MetricsList {
      */
     @Override
     public String toJson() {
-        // Extract the Fog Index value from the FogIndexChk object and format it
-        String fogIndex = fogIndexChk.getFogIndex().toString();
-        String[] fogIndexParts = fogIndex.split("testResults=");
-        String formattedFogIndex = fogIndexParts[1].replaceAll("[\\[\\],{}]", "").trim();
-        formattedFogIndex +=  "\n";
-        // Create a JSON-formatted string with a root object that has a FogIndex property and the formatted Fog Index value
-        return String.format("FogIndex: %s ", formattedFogIndex);
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("\n");
+
+        LinkedList<Map.Entry<String, TreeMap<String, Double>>> fogIndexList = fogIndexChk.getFogIndex();
+
+        if (!fogIndexList.isEmpty()) {
+            jsonBuilder.append("Fog Index: \n");
+            String className = "";
+            for (Map.Entry<String, TreeMap<String, Double>> entry : fogIndexList) {
+                className = entry.getKey();
+                jsonBuilder.append("Class - \"").append(className).append("\": \n");
+                int select = 0;
+                for (Map.Entry<String, Double> methodEntry : entry.getValue().entrySet()) {
+                    String methodName = methodEntry.getKey();
+                    Double value = methodEntry.getValue();
+                    if (select == 0) {
+                        jsonBuilder.append("\t\t FogIndex: (MethodName:Value) \n");
+                        select++;
+                    } else {
+                        jsonBuilder.append("\n\t\t FogIndex: (MethodName:Value) \n");
+                    }
+                    jsonBuilder.append("\t\t\t").append(methodName).append(":").append(value).append("\t");
+                    jsonBuilder.append("\n");
+                }
+                jsonBuilder.append("\n");
+            }
+        } else {
+            jsonBuilder.append("FogIndex\": \"No classes to traverse\"\n");
+        }
+        return jsonBuilder.toString();
     }
 }
