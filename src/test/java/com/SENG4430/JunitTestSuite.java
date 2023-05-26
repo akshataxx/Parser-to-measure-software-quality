@@ -18,7 +18,9 @@ import org.junit.runners.Suite;
         HalsteadComplexityChkTest.class,  // calls HalsteadComplexityChkTest class for execution
         FogIndexChkTest.class,             // calls FogIndexChkTest class for execution
         ClassCouplingChkTest.class,       // calls class coupling chk class for test exec
-        ResponseForClassChkTest.class     // calls responseForClassChk for test exec
+        ResponseForClassChkTest.class,     // calls responseForClassChk for test exec
+        FanTestClass.class,                 // calls FanInOutChk for test exec
+        CommentTestClass.class              // calls CommentsChk for test exec
 })
 public class JunitTestSuite {
     // left blank as it is used only as a holder for the above annotations

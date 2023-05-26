@@ -5,7 +5,7 @@
  Assessment: Assignment 2
  ****************************************************************************************************/
 
-package com.SENG4430.FanTest;
+package com.SENG4430;
 
 public class FanTestClass {
     public void methodA() {
