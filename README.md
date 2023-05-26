@@ -1,12 +1,5 @@
-# Software-Quality
-New Repo for SENG4430 because the old one got really confusing
-
-To run the program, pass this paramter as compile time argument: "D:\Software Quality\testResult.java" "-m" "halstead_complexity" "-r" "cmd"
-
-To display results with multiple parameters: "D:\Software Quality\testResult.java" "-m" "fog_index halstead_complexity" "-r" "cmd"
-
 -----------------------------------
-ReadMe for Assignment Submission
+Readme for Flightpub 2.0
 
 In order to run flighpub2.0 install/configure maven in IDE of choice.
 
@@ -14,13 +7,13 @@ In the IDE menu for Run/Debug Configurations
 
 Run clean compile from maven options
 
-The program takes following arguments 
+The program takes following arguments as program parameters in the form of compile time arguments
 
-1) Filepath/filename e.g.,"D:\Software Quality\testResult.java"
+1) Absolute Filepath/filename e.g.,"C:\Users\Dell\Akshata\SENG4430\Software-Quality"
 
-2) -m option list the matrices which the user wants to run, it can be a single metrice or multiple metrices at one go e.g., "fog_index halstead_complexity"
+2) -m option list the matrices which the user wants to run, it can be a single metric or multiple metrics or all metrics at one go e.g., "fog_index halstead_complexity" or "all" respectively.
 
-3) -r option list the output option by default output is routed to command prompt. below is the example of runtime arguments
+3) -r option list the output option and is routed to command prompt or file. Below is the example of runtime arguments. This can be either "cmd" or "file".
 
-   "D:\Software Quality\testResult.java" "-m" "fog_index halstead_complexity" "-r" "cmd"
+   "C:\Users\Dell\Akshata\SENG4430\Software-Quality" "-m" "fog_index halstead_complexity" "-r" "cmd"
 

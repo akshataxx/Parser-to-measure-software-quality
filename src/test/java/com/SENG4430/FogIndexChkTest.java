@@ -64,7 +64,7 @@ public class FogIndexChkTest {
         when(function1.getElements(any(TypeFilter.class))).thenReturn(comments1);
         when(function2.getElements(any(TypeFilter.class))).thenReturn(comments2);
 
-        when(comment1.getContent()).thenReturn("This is Test Comment 1 ");      // Mock contents are setup for comments
+        when(comment1.getContent()).thenReturn("This is Test Comment 1 ");      // Mock contents are set up for comments
         when(comment2.getContent()).thenReturn("This is Test Comment 2 ");
 
         TreeMap<String, Double> expected = new TreeMap<>();
@@ -79,6 +79,7 @@ public class FogIndexChkTest {
         assertEquals(expected, result);
     }
 
+    @BeforeEach
     @Test
     public void  testCalculateFogIndex() {                         // Test method for calculateFogIndex
         FogIndexChk fogIndexChk = new FogIndexChk();               // Create an instance of the class under test
@@ -100,7 +101,7 @@ public class FogIndexChkTest {
         int numComplexWords = fogIndexChk.countComplexWords(comment1Dtls) + fogIndexChk.countComplexWords(comment2Dtls);
         double expectedFogIndex = 0.4 * ((numWords / (double) numSentences) + (100 * numComplexWords / (double) numWords));
 
-        // Calculate the fogindex value using the method from FogIndexChk class and assert the result
+        // Calculate the fog index value using the method from FogIndexChk class and assert the result
         double result = fogIndexChk.calculateFogIndex(comments);
         assertEquals(expectedFogIndex, result, 0.0001);        // Specify a delta for floating-point comparison
     }
