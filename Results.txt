@@ -1,0 +1,27 @@
+
+Fog Index: 
+Class - "TestApplication": 
+		 FogIndex: (MethodName:Value) 
+			create:0.4	
+
+		 FogIndex: (MethodName:Value) 
+			createMetrics:10.700000000000001	
+
+		 FogIndex: (MethodName:Value) 
+			executeMetrics:9.066666666666668	
+
+		 FogIndex: (MethodName:Value) 
+			getResults:3.2	
+
+		 FogIndex: (MethodName:Value) 
+			main:8.383333333333333	
+
+		 FogIndex: (MethodName:Value) 
+			printHelp:8.514285714285714	
+
+		 FogIndex: (MethodName:Value) 
+			processArgs:3.254212454212454	
+
+		 FogIndex: (MethodName:Value) 
+			testResults:3.6	
+

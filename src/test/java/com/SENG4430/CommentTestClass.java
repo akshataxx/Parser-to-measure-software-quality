@@ -5,7 +5,7 @@
  Assessment: Assignment 2
  ****************************************************************************************************/
 
-package com.SENG4430.Comments.CommentTests;
+package com.SENG4430;
 
 public class CommentTestClass {
     //This is a class comment
