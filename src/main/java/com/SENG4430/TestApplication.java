@@ -32,6 +32,10 @@ import org.apache.commons.cli.*;
 import spoon.Launcher;
 import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtElement;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class TestApplication {
@@ -161,6 +165,29 @@ public class TestApplication {
         for (MetricsList userSelectedMetrics : metricLists) {
             results.add(userSelectedMetrics.toJson());
         }
+        try {
+            File myObj = new File("Results.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+                try {
+                    FileWriter myWriter = new FileWriter("Results.txt");
+                    for (String result : results) {
+                        myWriter.write(result);
+                    }
+                    myWriter.close();
+                    System.out.println("Successfully wrote to the file.");
+                } catch (IOException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
         return results;
     }
 
