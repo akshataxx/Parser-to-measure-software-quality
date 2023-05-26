@@ -1,7 +1,7 @@
 -----------------------------------
 Readme for Flightpub 2.0
 
-In order to run flighpub2.0 install/configure maven in IDE of choice.
+In order to run flighpub2.0 install/configure maven and java 17 in IDE of choice.
 
 In the IDE menu for Run/Debug Configurations
 
@@ -17,3 +17,4 @@ The program takes following arguments as program parameters in the form of compi
 
    "C:\Users\Dell\Akshata\SENG4430\Software-Quality" "-m" "fog_index halstead_complexity" "-r" "cmd"
 
+There is no need for program parameters to execute the test folder.

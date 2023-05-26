@@ -2,6 +2,7 @@ package com.SENG4430.CyclomaticComplexity;
 
 import spoon.Launcher;
 import spoon.reflect.code.*;
+import java.util.Scanner;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.Query;
@@ -66,12 +67,15 @@ public class CyclomaticComplexityChk {
         for (CtIf _if : _method.getElements(new TypeFilter<>(CtIf.class)))
             // for all if statements
         {
+            String ifToString = _if.toString();
             localSum++;
-            if (_if.getCondition() != null)
-                // if the statement has a condition
-            {
-                localSum += countOperator(_if.getCondition(), BinaryOperatorKind.AND);
-                localSum += countOperator(_if.getCondition(), BinaryOperatorKind.OR);
+            Scanner scanner = new Scanner(ifToString);
+
+            while(scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                int index = 0;
+                localSum += countOperator(line, "&&");
+                localSum += countOperator(line, "||");
             }
         }
         if (localSum > 0)
@@ -89,7 +93,16 @@ public class CyclomaticComplexityChk {
         for (CtWhile _while : _method.getElements(new TypeFilter<>(CtWhile.class)))
             // for each while statement
         {
+            String whileToString = _while.toString();
             localSum++;
+            Scanner scanner = new Scanner(whileToString);
+
+            while(scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                int index = 0;
+                localSum += countOperator(line, "&&");
+                localSum += countOperator(line, "||");
+            }
         }
         if (localSum > 0)
             // if there is a complexity within the method
@@ -107,23 +120,6 @@ public class CyclomaticComplexityChk {
             // for each for statement
         {
             localSum++;
-            if (_for.getExpression() != null)
-                // if statement has a condition
-            {
-                localSum += countOperator(_for.getExpression(), BinaryOperatorKind.AND);
-                localSum += countOperator(_for.getExpression(), BinaryOperatorKind.OR);
-            }
-        }
-        for (CtForEach _foreach : _method.getElements(new TypeFilter<>(CtForEach.class)))
-            // for each foreach statement
-        {
-            localSum++;
-            if (_foreach.getExpression() != null)
-                // if statement has a condition
-            {
-                localSum += countOperator(_foreach.getExpression(), BinaryOperatorKind.AND);
-                localSum += countOperator(_foreach.getExpression(), BinaryOperatorKind.OR);
-            }
         }
         if (localSum > 0)
             // if there is a complexity within the method
@@ -150,19 +146,19 @@ public class CyclomaticComplexityChk {
         return localSum;
     }
 
-    private int countOperator(CtExpression<?> _expression, BinaryOperatorKind _operator)
+    private int countOperator(String line, String check)
         // returns true if the statement matches the decision
     {
-        if (_expression instanceof CtBinaryOperator<?>)
-            // if the expression is a listed expression
-        {
-            CtBinaryOperator<?> _binaryOperator = (CtBinaryOperator<?>) _expression;
-            if (_binaryOperator.getKind() == _operator)
-                // if the expressions match
-            {
-                return 1;
+        int localsum = 0;
+        int index = 0;
+
+        while (index != -1){
+            index = line.indexOf(check,index);
+            if (index != -1){
+                localsum++;
+                index+= check.length();
             }
         }
-        return 0;
+        return localsum;
     }
 }

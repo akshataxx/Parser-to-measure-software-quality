@@ -18,7 +18,7 @@ public class LengthOfIdentifiersChk {
     // Stores average length of identifiers for each class
     private final HashMap<String, Double> averageLengthOfIdentifiers;
 
-    // Stores class and identifier of noteworthy identifiers
+    // Stores class and a list of identifiers that are less than or equal to cutoff
     private final HashMap<String, List<String>> lengthOfIdentifiersLessThanOrEqualToCutoff;
 
     // Cutoff limit for length of Identifiers
@@ -66,7 +66,7 @@ public class LengthOfIdentifiersChk {
 
             if (classNameLength <= cutOffLimit) {
                 // Add class name to lengthOfIdentifiersLessThanOrEqualToCutoff,
-                // if it is less than or equal to the cuttOff
+                // if it is less than or equal to the cutOff
                 lengthOfIdentifiersLessThanOrEqualToCutoff.computeIfAbsent(
                         clazz.getSimpleName(),
                         k -> new ArrayList<>()
@@ -98,7 +98,8 @@ public class LengthOfIdentifiersChk {
         for (CtMethod<?> method : methods) {
             int methodLength = method.getSimpleName().length();
             if (methodLength <= cutOffLimit) {
-                // Add method name to lengthOfIdentifiersLessThanOrEqualToCutoff if it is noteworthy
+                // Add method name to lengthOfIdentifiersLessThanOrEqualToCutoff
+                // if it is less than or equal to the cutOff
                 lengthOfIdentifiersLessThanOrEqualToCutoff.computeIfAbsent(
                         clazz.getSimpleName(),
                         k -> new ArrayList<>()
@@ -116,7 +117,8 @@ public class LengthOfIdentifiersChk {
         for (CtVariable<?> variable : variables) {
             int variableLength = variable.getSimpleName().length();
             if (variableLength <= cutOffLimit) {
-                // Add variable name to lengthOfIdentifiersLessThanOrEqualToCutoff if it is noteworthy
+                // Add variable name to lengthOfIdentifiersLessThanOrEqualToCutoff
+                // if it is less than or equal to the cutOff
                 lengthOfIdentifiersLessThanOrEqualToCutoff.computeIfAbsent(
                         clazz.getSimpleName(),
                         k -> new ArrayList<>()
