@@ -6,9 +6,9 @@
  */
 package com.SENG4430;
 import com.SENG4430.ClassCouplingTest.ClassCouplingChkTest;
+import com.SENG4430.DepthInheritanceTreeTest.DepthInheritanceTreeChkTest;
+import com.SENG4430.NOCTest.NumberOfChildrenChkTest;
 import com.SENG4430.ResponseForClassTest.ResponseForClassChkTest;
-import com.SENG4430.FogIndexChkTest;
-import com.SENG4430.HalsteadComplexityChkTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

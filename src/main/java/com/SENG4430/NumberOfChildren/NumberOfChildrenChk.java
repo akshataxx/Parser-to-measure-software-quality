@@ -1,7 +1,6 @@
 package com.SENG4430.NumberOfChildren;
 
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.HashMap;
 
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
@@ -12,13 +11,13 @@ import spoon.reflect.visitor.filter.TypeFilter;
 
 public class NumberOfChildrenChk {
 
-    private final LinkedList<Map.Entry<String, Integer>> numberOfChildrenChk;
+    private final HashMap<String, Integer> numberOfChildrenChk;
 
     public NumberOfChildrenChk() { // Constructor
-        numberOfChildrenChk = new LinkedList<>();
+        numberOfChildrenChk = new HashMap<>();
     }
 
-    public LinkedList<Map.Entry<String, Integer>> getNumberOfChildrenChk() {
+    public HashMap<String, Integer> getNumberOfChildrenChk() {
         return numberOfChildrenChk;
     }
 
@@ -31,7 +30,7 @@ public class NumberOfChildrenChk {
             if (!classObject.isInterface()) {
                 int numberOfChildren = calculateNumberOfChildren(classObject);
                 numberOfChildrenChk
-                        .add(new java.util.AbstractMap.SimpleEntry<>(classObject.getSimpleName(), numberOfChildren));
+                        .put(classObject.getSimpleName(), numberOfChildren);
             }
         }
 

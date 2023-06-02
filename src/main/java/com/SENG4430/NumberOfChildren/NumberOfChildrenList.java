@@ -29,7 +29,7 @@ public class NumberOfChildrenList extends MetricsList {
         jsonBuilder.append("\n");
         // Add the Number Of Children object to the JSON string
         jsonBuilder.append("\"Number of Children Per Class\": {\n");
-        for (Map.Entry<String, Integer> entry : numberOfChildrenChk.getNumberOfChildrenChk()) {
+        for (Map.Entry<String, Integer> entry : numberOfChildrenChk.getNumberOfChildrenChk().entrySet()) {
             jsonBuilder.append("\t\t\"" + entry.getKey() + "\": " + entry.getValue());
             jsonBuilder.append("\n");
         }

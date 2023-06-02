@@ -29,7 +29,7 @@ public class DepthInheritanceTreeList extends MetricsList {
         jsonBuilder.append("\n");
         // Add the Depth Inheritance Tree object to the JSON string
         jsonBuilder.append("\"Depth Inheritance Per Class\": {\n");
-        for (Map.Entry<String, Integer> entry : depthInheritanceTreeChk.getDepthInheritanceTreeCheck()) {
+        for (Map.Entry<String, Integer> entry : depthInheritanceTreeChk.getDepthInheritanceTreeCheck().entrySet()) {
             jsonBuilder.append("\t\t\"" + entry.getKey() + "\": " + entry.getValue());
             jsonBuilder.append("\n");
         }
