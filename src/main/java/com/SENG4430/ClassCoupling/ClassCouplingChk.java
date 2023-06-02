@@ -48,7 +48,7 @@ public class ClassCouplingChk
         //get CtClass
         CtClass<?> ctClass = couplingClass.getCtClass();
 
-        //System.out.println("-----------------------\n Class: " + ctClass.getSimpleName());
+        System.out.println("-----------------------\n Class: " + ctClass.getSimpleName());
 
         // Initialize the class coupling metric to zero
         int classCoupling = 0;
@@ -86,7 +86,7 @@ public class ClassCouplingChk
             {
                 if(!recordedClasses.containsKey(methodInvocation.getTarget().toString()))
                 {
-                    //System.out.println("\n Adding: " + methodInvocation.getTarget());
+                    System.out.println("\n Adding: " + methodInvocation.getTarget());
                     classCoupling++;
                     recordedClasses.put(methodInvocation.getTarget().toString(), 0);
                 }
@@ -115,7 +115,7 @@ public class ClassCouplingChk
                 //record class and increment class coupling
             if(!recordedClasses.containsKey(typedElementStr))
             {
-                //System.out.println("\n Adding: " + typedElementStr);
+                System.out.println("\n Adding: " + typedElementStr);
                 classCoupling++;
                 recordedClasses.put(typedElementStr, 0);
             }
