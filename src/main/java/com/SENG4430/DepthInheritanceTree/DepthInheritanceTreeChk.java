@@ -1,7 +1,6 @@
 package com.SENG4430.DepthInheritanceTree;
 
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.HashMap;
 
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
@@ -11,13 +10,13 @@ import spoon.reflect.visitor.filter.TypeFilter;
 
 public class DepthInheritanceTreeChk {
 
-    private final LinkedList<Map.Entry<String, Integer>> depthInheritanceTreeCheck;
+    private final HashMap<String, Integer> depthInheritanceTreeCheck;
 
     public DepthInheritanceTreeChk() { // Constructor
-        depthInheritanceTreeCheck = new LinkedList<>();
+        depthInheritanceTreeCheck = new HashMap<>();
     }
 
-    public LinkedList<Map.Entry<String, Integer>> getDepthInheritanceTreeCheck() {
+    public HashMap<String, Integer> getDepthInheritanceTreeCheck() {
         return depthInheritanceTreeCheck;
     }
 
@@ -30,7 +29,7 @@ public class DepthInheritanceTreeChk {
 
             int depthOfInheritanceTree = calculateDepthOfInheritanceTree(classObject);
             depthInheritanceTreeCheck
-                    .add(new java.util.AbstractMap.SimpleEntry<>(classObject.getSimpleName(), depthOfInheritanceTree));
+                    .put(classObject.getSimpleName(), depthOfInheritanceTree);
         }
 
     }
