@@ -27,14 +27,15 @@ public class ClassCouplingChkTest
         //Class with no external classes
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("/TestFiles/BadCode.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ClassCouplingTest/TestFiles/BadCode.java");
+        launcher.buildModel();
 
         ClassCouplingChk classCouplingChk = new ClassCouplingChk();
         classCouplingChk.check(launcher);
 
         for (Map.Entry<String, Integer> entry: classCouplingChk.getClassCouplings().entrySet())
         {
-            assertEquals(entry.getValue().intValue(), 1);
+            assertEquals(entry.getValue().intValue(), 0);
         }
     }
 
@@ -46,10 +47,12 @@ public class ClassCouplingChkTest
         //Class with a super class coupling
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("/TestFiles/BadderestCode.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ClassCouplingTest/TestFiles/BadderestCode.java");
+        launcher.buildModel();
 
         ClassCouplingChk classCouplingChk = new ClassCouplingChk();
         classCouplingChk.check(launcher);
+
 
         for (Map.Entry<String, Integer> entry: classCouplingChk.getClassCouplings().entrySet())
         {
@@ -65,7 +68,8 @@ public class ClassCouplingChkTest
         //External class calls in methods
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("./TestFiles/BaddestCode.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ClassCouplingTest/TestFiles/BaddestCode.java");
+        launcher.buildModel();
 
         ClassCouplingChk classCouplingChk = new ClassCouplingChk();
         classCouplingChk.check(launcher);
@@ -87,7 +91,8 @@ public class ClassCouplingChkTest
         //typecasting, etc.
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("/TestFiles/Test.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ClassCouplingTest/TestFiles/Test.java");
+        launcher.buildModel();
 
         ClassCouplingChk classCouplingChk = new ClassCouplingChk();
         classCouplingChk.check(launcher);

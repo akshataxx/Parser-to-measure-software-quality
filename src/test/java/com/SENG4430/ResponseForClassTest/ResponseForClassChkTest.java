@@ -13,6 +13,7 @@ import com.SENG4430.ResponseForClass.ResponseForClassChk;
 import org.junit.Test;
 import spoon.Launcher;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -29,16 +30,16 @@ public class ResponseForClassChkTest
 
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("./TestFiles/BadCode.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ResponseForClassTest/TestFiles/BadCode.java");
+        launcher.buildModel();
 
         ResponseForClassChk rfcChk = new ResponseForClassChk();
 
         rfcChk.check(launcher);
 
-        for (Map.Entry<String, Integer> entry: rfcChk.getResponseForClass().entrySet())
-        {
-            assertEquals(entry.getValue().intValue(), 4);
-        }
+        HashMap<String, Integer> set = new HashMap<>(rfcChk.getResponseForClass());
+
+        assertEquals(set.get("com.SENG4430.ResponseForClassTest.TestFiles.BadCode").intValue(), 4);
     }
 
     //Preconditions: none
@@ -51,15 +52,15 @@ public class ResponseForClassChkTest
 
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("./TestFiles/EmptyClass.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ResponseForClassTest/TestFiles/EmptyClass.java");
+        launcher.buildModel();
 
         ResponseForClassChk rfcChk = new ResponseForClassChk();
         rfcChk.check(launcher);
 
-        for (Map.Entry<String, Integer> entry: rfcChk.getResponseForClass().entrySet())
-        {
-            assertEquals(entry.getValue().intValue(), 1);
-        }
+        HashMap<String, Integer> set = new HashMap<>(rfcChk.getResponseForClass());
+
+        assertEquals(set.get("com.SENG4430.ResponseForClassTest.TestFiles.EmptyClass").intValue(), 1);
     }
 
     //Preconditions: none
@@ -74,15 +75,15 @@ public class ResponseForClassChkTest
 
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("./TestFiles/BaddestCode.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ResponseForClassTest/TestFiles/BaddestCode.java");
+        launcher.buildModel();
 
         ResponseForClassChk rfcChk = new ResponseForClassChk();
         rfcChk.check(launcher);
 
-        for (Map.Entry<String, Integer> entry: rfcChk.getResponseForClass().entrySet())
-        {
-            assertEquals(entry.getValue().intValue(), 8);
-        }
+        HashMap<String, Integer> set = new HashMap<>(rfcChk.getResponseForClass());
+
+        assertEquals(set.get("com.SENG4430.ResponseForClassTest.TestFiles.BaddestCode").intValue(), 8);
     }
 
     //Preconditions: none
@@ -97,15 +98,15 @@ public class ResponseForClassChkTest
 
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("./TestFiles/NotAsBadCode.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ResponseForClassTest/TestFiles/Inherited");
+        launcher.buildModel();
 
         ResponseForClassChk rfcChk = new ResponseForClassChk();
         rfcChk.check(launcher);
 
-        for (Map.Entry<String, Integer> entry: rfcChk.getResponseForClass().entrySet())
-        {
-            assertEquals(entry.getValue().intValue(), 10);
-        }
+        HashMap<String, Integer> set = new HashMap<>(rfcChk.getResponseForClass());
+
+        assertEquals(set.get("com.SENG4430.ResponseForClassTest.TestFiles.Inherited.NotAsBadCode").intValue(), 10);
     }
 
     //Preconditions: none
@@ -120,15 +121,15 @@ public class ResponseForClassChkTest
 
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("./TestFiles/Badderest.java");
+        launcher.addInputResource("./src/test/java/com/SENG4430/ResponseForClassTest/TestFiles/InheritedOverload");
+        launcher.buildModel();
 
         ResponseForClassChk rfcChk = new ResponseForClassChk();
 
         rfcChk.check(launcher);
 
-        for (Map.Entry<String, Integer> entry: rfcChk.getResponseForClass().entrySet())
-        {
-            assertEquals(entry.getValue().intValue(), 8);
-        }
+        HashMap<String, Integer> set = new HashMap<>(rfcChk.getResponseForClass());
+
+        assertEquals(set.get("com.SENG4430.ResponseForClassTest.TestFiles.InheritedOverload.BadderestCode").intValue(), 8);
     }
 }
