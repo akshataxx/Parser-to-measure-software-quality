@@ -5,9 +5,9 @@
  Assessment: Assignment 2
  ****************************************************************************************************/
 
-package com.SENG4430.Fan.FanTests;
+package com.SENG4430;
 
-public class FanOutTestClass {
+public class FanTestClass {
     public void methodA() {
         methodB();
         methodC();
@@ -32,7 +32,7 @@ public class FanOutTestClass {
     }
 
     public static void main(String[] args) {
-        FanOutTestClass testClass = new FanOutTestClass();
+        FanTestClass testClass = new FanTestClass();
         testClass.methodE();
     }
 }

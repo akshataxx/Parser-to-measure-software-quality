@@ -61,7 +61,7 @@ public class CommentsChk{
     //It calls a method to also traverse each method within a class.
     //@param classObject A Spoon element to represent a class object
     //@return Map<String, Integer> A linked list mapping each class to the amount of comments in each.
-    private Map<String, Integer> measureClassComments(CtClass<?> classObject) {
+    public Map<String, Integer> measureClassComments(CtClass<?> classObject) {
         List<?> comments = classObject.getElements(new TypeFilter<>(CtComment.class));
         int classCommentCount = comments.size();
 

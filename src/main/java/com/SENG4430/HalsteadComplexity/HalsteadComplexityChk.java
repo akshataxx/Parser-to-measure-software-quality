@@ -61,11 +61,11 @@ public class HalsteadComplexityChk {
         n2 += getTotalCountOfDistinctOperands();
         n2 += getTotalCountOfDistinctAssignmentOperands();
 
+
         N1 += sumValues(distinctOperators);
         N1 += sumValues(distinctAssgnOperators);
         N2 += sumValues(distinctOperands);
         N2 += sumValues(distinctAssgnOperands);
-
     }
     public int getN1(){ return n1;}
 
@@ -83,17 +83,17 @@ public class HalsteadComplexityChk {
     public int sumValues(Map<String, Integer> map) {
         return map.values().stream().mapToInt(Integer::intValue).sum();
     }
-    public int getTotalCountOfDistinctOperators() {
-        return sumValues(distinctOperators);
+    private int getTotalCountOfDistinctOperators() {
+        return distinctOperators.size();
     }
-    public int getTotalCountOfDistinctAssignmentOperators() {
-        return sumValues(distinctAssgnOperators);
+    private int getTotalCountOfDistinctAssignmentOperators() {
+        return distinctAssgnOperators.size();
     }
-    public int getTotalCountOfDistinctOperands() {
-        return sumValues(distinctOperands);
+    private int getTotalCountOfDistinctOperands() {
+        return distinctOperands.size();
     }
-    public int getTotalCountOfDistinctAssignmentOperands() {
-        return sumValues(distinctAssgnOperands);
+    private int getTotalCountOfDistinctAssignmentOperands() {
+        return distinctAssgnOperands.size();
     }
 
     private void halsteadComplexityClassComputation (CtClass<?> c) {
